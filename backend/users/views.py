@@ -1,6 +1,3 @@
-from datetime import datetime, timedelta
-from django.conf import settings
-from django.shortcuts import render, HttpResponse
 from users.models import User
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
@@ -8,11 +5,40 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ValidationError
 from backend_netropolis.utils import create_token, decode_token
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework.decorators import api_view
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
-@csrf_exempt 
+@swagger_auto_schema(
+    tags=['User'],
+    method='post',
+    request_body=openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        properties={
+            'name': openapi.Schema(type=openapi.TYPE_STRING),
+            'dob': openapi.Schema(type=openapi.TYPE_STRING),
+            'persona': openapi.Schema(type=openapi.TYPE_STRING),
+            'location': openapi.Schema(type=openapi.TYPE_STRING),
+            'field_of_specialization': openapi.Schema(type=openapi.TYPE_STRING),
+            'email': openapi.Schema(type=openapi.TYPE_STRING),
+            'password': openapi.Schema(type=openapi.TYPE_STRING),
+            'completed_quest_tags': openapi.Schema(type=openapi.TYPE_STRING),
+            'active_quest': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+            'points': openapi.Schema(type=openapi.TYPE_INTEGER)
+        },
+        required=['name', 'dob', 'persona', 'location','field_of_specialization' ,'email', 'password']
+    ),
+    responses={
+        201: openapi.Response('Created'),
+        400: 'Bad Request'
+    }
+)
+@api_view(['POST'])
+@csrf_exempt
 @require_http_methods(['POST'])
 def register(request):
-    user_details = json.loads(request.body)
+    user_details = request.data
     try:
         user = User(**user_details)
         user.full_clean()
@@ -23,12 +49,30 @@ def register(request):
         return JsonResponse({"errors": e.message_dict}, status=400)
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
+    
 
-@csrf_exempt 
+@swagger_auto_schema(
+    tags=['User'],
+    method='post',
+    request_body=openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        properties={
+            'email': openapi.Schema(type=openapi.TYPE_STRING),
+            'password': openapi.Schema(type=openapi.TYPE_STRING),
+        },
+        required=['email', 'password']
+        ),
+    responses={
+        201: openapi.Response('Created'),
+        400: 'Bad Request'
+    }
+)
+@api_view(['POST'])
+@csrf_exempt
 @require_http_methods(['POST'])
 def login(request):
     try:
-        user_details = json.loads(request.body)
+        user_details = request.data
     except json.JSONDecodeError as e:
         return JsonResponse({"error": f"Invalid JSON {e}"}, status=400)
     try:
@@ -41,6 +85,16 @@ def login(request):
     except User.DoesNotExist:
         return JsonResponse({"error": "User does not exist"}, status=404)
 
+@swagger_auto_schema(
+    tags=['User'],
+    method='get',
+    manual_parameters=[openapi.Parameter('Authorization', in_=openapi.IN_HEADER, type=openapi.TYPE_STRING)],
+    responses={
+        201: openapi.Response('Created'),
+        400: 'Bad Request'
+    }
+)
+@api_view(['GET'])
 @csrf_exempt
 @require_http_methods(['GET'])
 def get_user(request):
