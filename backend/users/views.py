@@ -8,9 +8,11 @@ from django.views.decorators.http import require_http_methods
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ValidationError
+from dotenv import load_dotenv
+import os
 
-SECRET_KEY = 'sedfj23j3h48934ugj43h83tn4hiu'  # Replace with your own secret key
-
+load_dotenv()
+SECRET_KEY = os.getenv('SECRET_KEY')
 def create_token(email):
     payload = {
         'email': email,
