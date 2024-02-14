@@ -67,10 +67,8 @@ def get_user(request):
     token = request.headers.get('Authorization')
     if not token:
         return JsonResponse({"error": "Token is required"}, status=400)
-    payload = decode_token(token)
-    if "error" in payload:
-        return JsonResponse(payload, status=401)
     try:
+        payload = decode_token(token)
         user = User.objects.get(email=payload.get('email'))
         # return JsonResponse({"user": user.__dict__}, status=200)
         return JsonResponse({"user": {
@@ -86,3 +84,5 @@ def get_user(request):
         }}, status=200)
     except User.DoesNotExist:
         return JsonResponse({"error": "User does not exist"}, status=404)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
