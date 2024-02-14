@@ -1,4 +1,3 @@
-import jwt
 from datetime import datetime, timedelta
 from django.conf import settings
 from django.shortcuts import render, HttpResponse
@@ -8,25 +7,7 @@ from django.views.decorators.http import require_http_methods
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ValidationError
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-SECRET_KEY = os.getenv('SECRET_KEY')
-def create_token(email):
-    payload = {
-        'email': email,
-        'exp': datetime.utcnow() + timedelta(days=1),
-        'iat': datetime.utcnow(),
-    }
-    return jwt.encode(payload, SECRET_KEY, algorithm='HS256')
-
-def decode_token(token):
-    try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
-        return payload
-    except jwt.ExpiredSignatureError:
-        return {"error": "Token has expired"}
+from backend_netropolis.utils import create_token, decode_token
 
 @csrf_exempt 
 @require_http_methods(['POST'])
@@ -35,9 +16,8 @@ def register(request):
     try:
         user = User(**user_details)
         user.full_clean()
-        print("User is valid")
         user.save()
-        token = create_token(user.email)
+        token = create_token(user.email, "user")
         return JsonResponse({"message": "User registered successfully", "token": token}, status=201)
     except ValidationError as e:
         return JsonResponse({"errors": e.message_dict}, status=400)
@@ -54,7 +34,7 @@ def login(request):
     try:
         user = User.objects.get(email=user_details.get('email'))
         if user.password == user_details.get('password'):
-            token = create_token(user.email)
+            token = create_token(user.email, "user")
             return JsonResponse({"message": "Login successful", "token": token}, status=200)
         else:
             return JsonResponse({"error": "Invalid password"}, status=400)
@@ -70,8 +50,7 @@ def get_user(request):
     try:
         payload = decode_token(token)
         user = User.objects.get(email=payload.get('email'))
-        # return JsonResponse({"user": user.__dict__}, status=200)
-        return JsonResponse({"user": {
+        return JsonResponse({
             "name": user.name,
             "dob": user.dob,
             "persona": user.persona,
@@ -81,7 +60,7 @@ def get_user(request):
             "completed_quest_tags": user.completed_quest_tags,
             "active_quest": user.active_quest,
             "email": user.email,
-        }}, status=200)
+        }, status=200)
     except User.DoesNotExist:
         return JsonResponse({"error": "User does not exist"}, status=404)
     except Exception as e:
