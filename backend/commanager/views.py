@@ -93,8 +93,9 @@ def getuser(request):
     token = request.headers.get('Authorization')
     if token:
         try:
-            user = decode_token(token)
-            return JsonResponse({"user": user})
+            payload = decode_token(token)
+            user = ComManager.objects.get(email=payload['email'])
+            return JsonResponse({"name": user.name, "dob": user.dob, "location": user.location, "area": user.area, "email": user.email}, status=200)
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
     else:
