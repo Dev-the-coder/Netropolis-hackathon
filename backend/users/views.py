@@ -50,7 +50,7 @@ def login(request):
     try:
         user_details = json.loads(request.body)
     except json.JSONDecodeError as e:
-        return JsonResponse({"error": "Invalid JSON "+ str(e)}, status=400)
+        return JsonResponse({"error": f"Invalid JSON {e}"}, status=400)
     try:
         user = User.objects.get(email=user_details.get('email'))
         if user.password == user_details.get('password'):
