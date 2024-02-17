@@ -1,7 +1,7 @@
 from commanager.models import ComManager
+from quest.models import Quest
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-import json
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ValidationError
 from backend_netropolis.utils import create_token, decode_token
@@ -39,7 +39,7 @@ def register(request):
         user = ComManager(**user_details)
         user.full_clean()
         user.save()
-        token = create_token(user.email, "commanager")
+        token = create_token(user.id, "commanager")
         return JsonResponse({"message": "ComManager registered successfully", "token": token}, status=201)
     except ValidationError as e:
         return JsonResponse({"errors": e.message_dict}, status=400)
@@ -69,7 +69,7 @@ def login(request):
     user_details = request.data
     try:
         user = ComManager.objects.get(email=user_details['email'], password=user_details['password'])
-        token = create_token(user.email, "commanager")
+        token = create_token(user.id, "commanager")
         return JsonResponse({"message": "ComManager logged in successfully", "token": token}, status=200)
     except ComManager.DoesNotExist:
         return JsonResponse({"error": "ComManager does not exist"}, status=400)
@@ -94,9 +94,33 @@ def getuser(request):
     if token:
         try:
             payload = decode_token(token)
-            user = ComManager.objects.get(email=payload['email'])
+            user = ComManager.objects.get(id=payload['id'])
             return JsonResponse({"name": user.name, "dob": user.dob, "location": user.location, "area": user.area, "email": user.email}, status=200)
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
     else:
         return JsonResponse({"error": "Token not provided"}, status=400)
+    
+@swagger_auto_schema(
+    tags=['ComManager'],
+    method='get',
+    manual_parameters=[openapi.Parameter('Authorization', in_=openapi.IN_HEADER, type=openapi.TYPE_STRING)],
+    responses={
+        200: openapi.Response('OK'),
+        400: 'Bad Request'
+    }
+)
+@api_view(['GET'])
+@csrf_exempt
+@require_http_methods(['GET'])
+def myQuests(request):
+    token = request.headers.get('Authorization')
+    if not token:
+        return JsonResponse({"error": "Token not provided"}, status=400)
+    try:
+        payload = decode_token(token)
+        user = ComManager.objects.get(id=payload['id'])
+        quests = Quest.objects.filter(comManagerId=user.id)
+        return JsonResponse({"quests": list(quests.values())}, status=200)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)

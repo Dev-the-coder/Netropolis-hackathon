@@ -1,10 +1,5 @@
 from django.db import models
 
-# Create your models here.
-# name - 
-#  dob - 
-#  location - 
-#  area -
 class ComManager(models.Model):
     name = models.CharField(max_length=100)
     dob = models.DateField()

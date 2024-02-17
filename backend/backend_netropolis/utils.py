@@ -5,9 +5,9 @@ from datetime import datetime, timedelta
 
 load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
-def create_token(email, role="user"):
+def create_token(id, role="user"):
     payload = {
-        'email': email,
+        'id': id,
         'role': role,
         'exp': datetime.utcnow() + timedelta(days=1),
         'iat': datetime.utcnow(),

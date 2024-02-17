@@ -43,7 +43,7 @@ def register(request):
         user = User(**user_details)
         user.full_clean()
         user.save()
-        token = create_token(user.email, "user")
+        token = create_token(user.id, "user")
         return JsonResponse({"message": "User registered successfully", "token": token}, status=201)
     except ValidationError as e:
         return JsonResponse({"errors": e.message_dict}, status=400)
@@ -78,7 +78,7 @@ def login(request):
     try:
         user = User.objects.get(email=user_details.get('email'))
         if user.password == user_details.get('password'):
-            token = create_token(user.email, "user")
+            token = create_token(user.id, "user")
             return JsonResponse({"message": "Login successful", "token": token}, status=200)
         else:
             return JsonResponse({"error": "Invalid password"}, status=400)
@@ -103,7 +103,7 @@ def get_user(request):
         return JsonResponse({"error": "Token is required"}, status=400)
     try:
         payload = decode_token(token)
-        user = User.objects.get(email=payload.get('email'))
+        user = User.objects.get(id=payload.get('id'))
         return JsonResponse({
             "name": user.name,
             "dob": user.dob,

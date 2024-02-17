@@ -6,10 +6,10 @@ class User(models.Model):
     persona = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     points = models.IntegerField(default=0)
-    field_of_specialization = models.CharField(max_length=100)
+    field_of_specialization = models.CharField(max_length=200)
     completed_quest_tags = models.CharField(max_length=100, default="", blank=True)
     active_quest = models.BooleanField(default=False)
-    email = models.EmailField(max_length=100, unique=True, primary_key=True)
+    email = models.EmailField(max_length=200, unique=True )
     password = models.CharField(max_length=100)
 
     def __str__(self):

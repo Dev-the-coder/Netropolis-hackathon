@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework',
     'commanager.apps.CommanagerConfig',
+    'quest.apps.QuestConfig'
 ]
 
 MIDDLEWARE = [
