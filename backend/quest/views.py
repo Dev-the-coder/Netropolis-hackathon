@@ -15,7 +15,7 @@ from users.models import User
 @swagger_auto_schema(
     tags=['Quest'],
     method='post',
-    operation_description="Create a new quest. This endpoint is only accessible to community managers. They specify the details of the quest and it is created in the database.",
+    operation_description="Create a new quest. This endpoint is only accessible to community managers. They specify the details of the quest and it is created in the database. Requires a token of Community manager in the header of the request.",
     manual_parameters=[openapi.Parameter('Authorization', in_=openapi.IN_HEADER, type=openapi.TYPE_STRING, required=True)],
     request_body=openapi.Schema(
         type=openapi.TYPE_OBJECT,
@@ -107,6 +107,7 @@ def allQuest(request):
 @swagger_auto_schema(
     tags=['Quest'],
     method='post',
+    operation_description="Register for a quest. This endpoint is only accessible to users. They specify the quest id and it is created in the database. Requires a token of User in the header of the request.",
     manual_parameters=[openapi.Parameter('Authorization', in_=openapi.IN_HEADER, type=openapi.TYPE_STRING, required=True)],
     request_body=openapi.Schema(
         type=openapi.TYPE_OBJECT,
@@ -154,6 +155,10 @@ def questRequest(request):
 @swagger_auto_schema(
     tags=['Quest'],
     method='put',
+    operation_description="""Update the status of a quest request. This endpoint is only accessible to community managers. They specify the quest id, user id and the status and it is updated in the database. Requires a token of Community manager in the header of the request. The status can be  either 'Accepted' or 'Rejected' or 'Completed' . 
+    If the status is 'Accepted', the user is registered for the quest. This will set the user's quest active to True. 
+    If the status is 'Rejected', the user is not registered for the quest. 
+    If the status is 'Completed', the user has completed the quest and the points are added to the user's profile and the user's active quest is set to False.""",
     manual_parameters=[openapi.Parameter('Authorization', in_=openapi.IN_HEADER, type=openapi.TYPE_STRING, required=True)],
     request_body=openapi.Schema(
         type=openapi.TYPE_OBJECT,
@@ -188,6 +193,7 @@ def questRequestAction(request):
         if not quest:
             return JsonResponse({"error": "Quest not found"}, status=404)
         quest.update(status=request.data.get('status'))
+        updateStatus(request.data.get('status'), request.data.get('user_id'), request.data.get('quest_id'))
         return JsonResponse({"message": "Quest request updated successfully"}, status=200)
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
@@ -196,6 +202,7 @@ def questRequestAction(request):
 @swagger_auto_schema(
     tags=['Quest'],
     method='get',
+    operation_description="Get all requests for a quest. This endpoint is only accessible to community managers. They specify the quest id and this endpoint returns all the requests that have been made for this quest . Requires a token of Community manager in the header of the request.",
     manual_parameters=[openapi.Parameter('Authorization', in_=openapi.IN_HEADER, type=openapi.TYPE_STRING, required=True)],
     responses={
         200: openapi.Response('OK'),
@@ -221,3 +228,16 @@ def questRequests(request, id):
         return JsonResponse({"requests": list(quest.values())}, status=200)
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
+    
+
+def updateStatus(status, user_id, quest_id):
+    if str(status).lower() == "accepted":
+        user = User.objects.get(id=user_id)
+        user.update(active_quest=True)
+
+    if str(status).lower() == "completed":
+        user = User.objects.get(id=user_id)
+        quest = Quest.objects.get(id=quest_id)
+        user.update(active_quest=False)
+        user.update(points=user.points + quest.points)
+        user.update(completed_quest_tags=user.completed_quest_tags + quest.tags)

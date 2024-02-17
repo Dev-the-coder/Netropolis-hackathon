@@ -112,6 +112,7 @@ def getuser(request):
 @swagger_auto_schema(
     tags=['ComManager'],
     method='get',
+    operation_description='Get all quests created by the ComManager. Requires a valid token of Community manager.',
     manual_parameters=[openapi.Parameter('Authorization', in_=openapi.IN_HEADER, type=openapi.TYPE_STRING, required=True)],
     responses={
         200: openapi.Schema(
