@@ -88,7 +88,7 @@ def login(request):
 @swagger_auto_schema(
     tags=['User'],
     method='get',
-    manual_parameters=[openapi.Parameter('Authorization', in_=openapi.IN_HEADER, type=openapi.TYPE_STRING)],
+    manual_parameters=[openapi.Parameter('Authorization', in_=openapi.IN_HEADER, type=openapi.TYPE_STRING, required=True)],
     responses={
         201: openapi.Response('Created'),
         400: 'Bad Request'

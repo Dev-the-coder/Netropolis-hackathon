@@ -5,7 +5,7 @@ class ComManager(models.Model):
     dob = models.DateField()
     location = models.CharField(max_length=100)
     area = models.CharField(max_length=100)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
     
     def __str__(self):
