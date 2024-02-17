@@ -90,7 +90,20 @@ def login(request):
     method='get',
     manual_parameters=[openapi.Parameter('Authorization', in_=openapi.IN_HEADER, type=openapi.TYPE_STRING, required=True)],
     responses={
-        201: openapi.Response('Created'),
+        201: openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'name': openapi.Schema(type=openapi.TYPE_STRING),
+                'dob': openapi.Schema(type=openapi.TYPE_STRING),
+                'persona': openapi.Schema(type=openapi.TYPE_STRING),
+                'location': openapi.Schema(type=openapi.TYPE_STRING),
+                'field_of_specialization': openapi.Schema(type=openapi.TYPE_STRING),
+                'email': openapi.Schema(type=openapi.TYPE_STRING),
+                'completed_quest_tags': openapi.Schema(type=openapi.TYPE_STRING),
+                'active_quest': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+                'points': openapi.Schema(type=openapi.TYPE_INTEGER)
+            },
+        ),
         400: 'Bad Request'
     }
 )
