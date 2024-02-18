@@ -1,0 +1,20 @@
+.applications{
+    /* background-color: yellow; */
+    margin-top: 122px;
+    border: 1px solid skyblue;
+    border-radius: 5px;
+    min-height: 390px;
+    padding-left: 17px;
+    background-color: aliceblue;
+}
+
+.applications h1{
+    margin-top: 20px;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.applications li{
+    font-size: 28px;
+    color: blue;
+}

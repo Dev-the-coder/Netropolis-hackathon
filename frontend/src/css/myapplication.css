@@ -1,0 +1,22 @@
+.my-application-container{
+    min-height: 400px;
+    background-color: aliceblue;
+}
+
+.my-application-container h1{
+    text-align: center;
+    font-size: 68px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.no-record{
+    font-size: 36px;
+    color: blue;
+    margin-left: 92px;
+}
+.no-record a{
+    font-size: 26px;
+    font-weight: 800;
+    margin-left: -13px;
+}

@@ -1,0 +1,47 @@
+.container{
+    margin: 15px;
+}
+
+
+.Questboardsearchbox{
+    /* margin-top: 1rem; */
+    background-color: rgba(197, 240, 240, 0.755);
+    display: grid;
+    grid-template-columns: 26rem  20rem;
+}
+.Questboardsearchbar{
+    /* background-color: beige; */
+    grid-column: 2/5;
+    height: 200px;
+    width: 930px;
+    text-align: center;
+    padding-top: 50px;
+}
+
+.questboardcontainer{
+    display: grid;
+    grid-template-columns: 26rem  20rem;
+}
+
+.questboardrow{
+    grid-column: 2/5;
+}
+
+.Questboardsearchbox .Questboardsearchbar input{
+    width: 356px;
+    height: 55px;
+    margin: 22px;
+    margin-bottom: 10px;
+    border: aliceblue;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.Questboardsearchbox .Questboardsearchbar p{
+    font-weight: 500;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 27px;
+}
