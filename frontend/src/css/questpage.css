@@ -1,0 +1,70 @@
+.quest-page{
+    width: 60%;
+    margin-left: 260px;
+    
+}
+.quest-details{
+    padding-top: 50px;
+    border: 2px solid skyblue;
+    border-radius: 5px;
+    padding-left: 17px;
+    background-color: aliceblue;
+    min-height: 596px;
+}
+
+.quest-details h1{
+    font-size: 80px;
+    padding-bottom: 14px;
+}
+
+.quest-details h4{
+    padding-top: 23px;
+    font-size: 36px;
+}
+.quest-details h4 span{
+    font-weight: 400;
+}
+
+.quest-form-container{
+    padding-top: 39px;
+    background-color: aliceblue;
+    border: 2px solid #9eb2c4;
+    margin-top: 87px;
+    margin-bottom: 80px;
+    border-radius: 23px;
+}
+.quest-form-container h2{
+    font-size: 42px;
+    padding-bottom: 36px;
+    text-align: center;
+}
+
+.quest-form{
+    padding-left: 9px;
+    font-size: 30px;
+}
+.quest-form-container .quest-form label{
+    padding: 13px;
+}
+
+.quest-form-container .quest-form button{
+    color: white;
+    background-color: blue;
+    margin-left: 14px;
+    margin-bottom: 34px;
+}
+
+#already-applied{
+    margin-bottom: 76px;
+}
+
+#already-applied h1{
+    color: red;
+    margin-top: 28px;
+    
+}
+
+#already-applied a{
+    font-size: 22px;
+    margin-left: -16px;
+}

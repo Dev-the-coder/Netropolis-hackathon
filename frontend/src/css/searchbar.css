@@ -1,0 +1,42 @@
+.searchbox{
+    /* margin-top: 1rem; */
+    background-color: rgba(197, 240, 240, 0.755);
+    display: grid;
+    grid-template-columns: 26rem  20rem;
+}
+.searchbar{
+    /* background-color: beige; */
+    grid-column: 2/5;
+    height: 350px;
+    width: 930px;
+    text-align: center;
+    padding-top: 50px;
+}
+
+.searchbox .searchbar h1{
+    font-size: 5.0rem;
+}
+
+.searchbox .searchbar h2{
+    font-size: 3.0rem;
+    padding: 15px;
+}
+
+.searchbox .searchbar input{
+    width: 356px;
+    height: 55px;
+    margin: 22px;
+    margin-bottom: 10px;
+    border: aliceblue;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.searchbox .searchbar p{
+    font-weight: 500;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 27px;
+}

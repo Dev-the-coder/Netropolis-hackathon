@@ -1,0 +1,21 @@
+.quest-card{
+    /* background-color: red; */
+    height: 150px;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+.quest-card-title{
+    font-size: large;
+    text-transform: capitalize;
+}
+.quest-card-subtitle{
+    font-size: small;   
+}
+
+
+.quest-card #applicantsanchor{
+    text-decoration: none;
+    font-size: 19px;
+    margin-left: -14px;
+}
