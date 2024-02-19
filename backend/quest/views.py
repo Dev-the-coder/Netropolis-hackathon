@@ -48,6 +48,8 @@ def createQuest(request):
         return JsonResponse({"error": "Token is required"}, status=400)
     try:
         payload = decode_token(token)
+        if payload['role'] != 'commanager':
+            return JsonResponse({"error": "Invalid token"}, status=400)
         user = ComManager.objects.get(id=payload['id'])
         if not user:
             return JsonResponse({"error": "Community manager profile not found"}, status=404)
@@ -133,6 +135,8 @@ def questRequest(request):
     except Exception as e:
         return JsonResponse({"error": "Invalid token, please sign in again"}, status=500)
     try:
+        if payload['role'] != 'user':
+            return JsonResponse({"error": "Invalid token"}, status=400)
         user = User.objects.get(id=payload['id'])
         if not user:
             return JsonResponse({"error": "User profile not found"}, status=404)
@@ -186,6 +190,8 @@ def questRequestAction(request):
     except Exception as e:
         return JsonResponse({"error": "Invalid token, please sign in again"}, status=500)
     try:
+        if payload['role'] != 'commanager':
+            return JsonResponse({"error": "Invalid token"}, status=400)
         user = ComManager.objects.get(id=payload['id'])
         if not user:
             return JsonResponse({"error": "User profile not found"}, status=404)
@@ -205,7 +211,23 @@ def questRequestAction(request):
     operation_description="Get all requests for a quest. This endpoint is only accessible to community managers. They specify the quest id and this endpoint returns all the requests that have been made for this quest . Requires a token of Community manager in the header of the request.",
     manual_parameters=[openapi.Parameter('Authorization', in_=openapi.IN_HEADER, type=openapi.TYPE_STRING, required=True)],
     responses={
-        200: openapi.Response('OK'),
+        200: openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'requests': openapi.Schema(
+                    type=openapi.TYPE_ARRAY,
+                    items=openapi.Schema(
+                        type=openapi.TYPE_OBJECT,
+                        properties={
+                            'id': openapi.Schema(type=openapi.TYPE_INTEGER),
+                            'quest_id': openapi.Schema(type=openapi.TYPE_INTEGER),
+                            'user_id': openapi.Schema(type=openapi.TYPE_INTEGER),
+                            'status': openapi.Schema(type=openapi.TYPE_STRING)
+                        }
+                    )
+                )
+            }
+        ),
         400: 'Bad Request'
     }
 )
@@ -221,6 +243,8 @@ def questRequests(request, id):
     except Exception as e:
         return JsonResponse({"error": "Invalid token, please sign in again"}, status=500)
     try:
+        if payload['role'] != 'commanager':
+            return JsonResponse({"error": "Invalid token"}, status=400)
         user = ComManager.objects.get(id=payload['id'])
         if not user:
             return JsonResponse({"error": "User profile not found"}, status=404)
@@ -233,11 +257,16 @@ def questRequests(request, id):
 def updateStatus(status, user_id, quest_id):
     if str(status).lower() == "accepted":
         user = User.objects.get(id=user_id)
-        user.update(active_quest=True)
+        user.active_quest = True
+        user.save()
 
     if str(status).lower() == "completed":
         user = User.objects.get(id=user_id)
         quest = Quest.objects.get(id=quest_id)
-        user.update(active_quest=False)
-        user.update(points=user.points + quest.points)
-        user.update(completed_quest_tags=user.completed_quest_tags + quest.tags)
+        # user.update(active_quest=False)
+        # user.update(points=user.points + quest.points)
+        # user.update(completed_quest_tags=user.completed_quest_tags + quest.tags)
+        user.active_quest = False
+        user.points = user.points + quest.points
+        user.completed_quest_tags = user.completed_quest_tags + quest.tags
+        user.save()
