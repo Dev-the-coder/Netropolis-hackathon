@@ -9,7 +9,7 @@ def create_token(id, role="user"):
     payload = {
         'id': id,
         'role': role,
-        'exp': datetime.utcnow() + timedelta(days=1),
+        'exp': datetime.utcnow() + timedelta(days=15),
         'iat': datetime.utcnow(),
     }
     return jwt.encode(payload, SECRET_KEY, algorithm='HS256')

@@ -116,6 +116,8 @@ def get_user(request):
         return JsonResponse({"error": "Token is required"}, status=400)
     try:
         payload = decode_token(token)
+        if payload.get('role') != 'user':
+            return JsonResponse({"error": "Invalid token"}, status=400)
         user = User.objects.get(id=payload.get('id'))
         return JsonResponse({
             "name": user.name,

@@ -102,6 +102,8 @@ def getuser(request):
     if token:
         try:
             payload = decode_token(token)
+            if payload['role'] != 'commanager':
+                return JsonResponse({"error": "Invalid token"}, status=400)
             user = ComManager.objects.get(id=payload['id'])
             return JsonResponse({"name": user.name, "dob": user.dob, "location": user.location, "area": user.area, "email": user.email}, status=200)
         except Exception as e:
@@ -149,6 +151,8 @@ def myQuests(request):
         return JsonResponse({"error": "Token not provided"}, status=400)
     try:
         payload = decode_token(token)
+        if payload['role'] != 'commanager':
+            return JsonResponse({"error": "Invalid token"}, status=400)
         user = ComManager.objects.get(id=payload['id'])
         quests = Quest.objects.filter(comManagerId=user.id)
         return JsonResponse({"quests": list(quests.values())}, status=200)
