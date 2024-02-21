@@ -6,11 +6,16 @@ from rest_framework.decorators import api_view
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from quest.models import Quest
-import requests
 from dotenv import load_dotenv
 import os
+from openai import OpenAI
+# from bing_chat import BingGPT
+
 
 load_dotenv()
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
 @swagger_auto_schema(
     tags=['Search'],
     method='get',
@@ -133,39 +138,28 @@ def searchByTags(request):
 @csrf_exempt
 @require_http_methods(['POST'])
 def deepSearch(request):
-
     quests = Quest.objects.all()
-    # Make a api request to a search engine to select the ids
     SystemMessage =  "You have to act as a checker endpoint. I will give you one phrase and then give you some data in the form of id, title, description, tags, and you have to select the closest data that match with the phrase. You have to only respond with the id. If the data which are relevant have id a, b, c, and d you have to return only a,b,c,d in single line without any spaces or line break. Select all that are close to the phrase. with just ids seperated by commas"
     ContentMessage = f'Phrase: {request.data.get("phrase")}. Data: '
     for quest in quests:
         ContentMessage += "{"+f' id:{quest.id}, title:{quest.title}, description:{quest.description}, tags:{quest.tags} ' + "}"
-    payload=     [
-        {
-            "role": "system",
-            "content": SystemMessage
-        },
+    
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {
+                "role": "system",
+                "content": SystemMessage
+            },
             {
                 "role": "user",
                 "content": ContentMessage
             }
         ]
-    url = os.getenv("DEEP_SEARCH_ENDPOINT")
-    headers = {
-	"content-type": "application/json",
-    f"{os.getenv('REQUEST_HEADER1')}": f"{os.getenv('HEADER1_VALUE')}",
-    f"{os.getenv('REQUEST_HEADER2')}": f"{os.getenv('HEADER2_VALUE')}"
-    }
-    response = requests.post(url, json=payload, headers=headers)
-    print("response: ", response)
-    res = response.json()
-    print(res)
-    if (len(res.keys())==1):
-        return JsonResponse({"error": "The NLP server is down. Subscription is down"})
-
-    try: 
-        Ids = res['text'].split(',')
-        print(f"getting ids: {Ids}")
+    )
+    res =  response.choices[0].message.content
+    try:
+        Ids = res.split(',')
         quests = Quest.objects.filter(id__in=Ids)
         return JsonResponse({"quests": list(quests.values())}, safe=False, status=201)
     except Exception as e:
