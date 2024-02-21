@@ -19,7 +19,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 @swagger_auto_schema(
     tags=['Search'],
     method='get',
-    operation_description='Get all tags',
+    operation_description='Get all tags.',
     responses={
         201: openapi.Schema(
             type=openapi.TYPE_OBJECT,
@@ -44,7 +44,7 @@ def getTags(request):
 @swagger_auto_schema(
     tags=['Search'],
     method='get',
-    operation_description='Search quests by tags',
+    operation_description='Search quests by tags. Takes a list of tags, separated by commas, and returns all the quests that have at least one of those tags.',
     manual_parameters=[
         openapi.Parameter(
             name='tags',
@@ -97,7 +97,7 @@ def searchByTags(request):
 @swagger_auto_schema(
     tags=['Search'],
     method='post',
-    operation_description='Deep search for quests',
+    operation_description='Deep search for quests. This endpoint will take a phrase and then will search for similarity between this phrase and all the quests title, description and tags. If there is a match it will give back those quests. This uses GPT 3 model to find the similarity.',
     request_body=openapi.Schema(
         type=openapi.TYPE_OBJECT,
         properties={
