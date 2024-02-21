@@ -25,3 +25,20 @@ class QuestRegistration(models.Model):
     class Meta:
         unique_together = ('quest', 'user')
         db_table = "quest_registration"
+
+# response Model for Request response
+def RequestSchema(query):
+    response = []
+    for req in query:
+        response_obj = {
+            "accepted": req.status,
+            "user_id": req.user.id,
+            "username": req.user.name,
+            "email": req.user.email,
+            "persona": req.user.persona, 
+            "points" : req.user.points, 
+            "field_of_specialization": req.user.field_of_specialization,
+            "completed_quest_tags": req.user.completed_quest_tags
+        }
+        response.append(response_obj)
+    return response

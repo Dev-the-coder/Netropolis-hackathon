@@ -8,7 +8,7 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import api_view
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
-from quest.models import Quest, QuestRegistration
+from quest.models import Quest, QuestRegistration, RequestSchema
 from commanager.models import ComManager
 from users.models import User
 
@@ -219,10 +219,14 @@ def questRequestAction(request):
                     items=openapi.Schema(
                         type=openapi.TYPE_OBJECT,
                         properties={
-                            'id': openapi.Schema(type=openapi.TYPE_INTEGER),
-                            'quest_id': openapi.Schema(type=openapi.TYPE_INTEGER),
-                            'user_id': openapi.Schema(type=openapi.TYPE_INTEGER),
-                            'status': openapi.Schema(type=openapi.TYPE_STRING)
+                            "accepted": openapi.Schema(type=openapi.TYPE_STRING),
+                            "user_id": openapi.Schema(type=openapi.TYPE_STRING),
+                            "username": openapi.Schema(type=openapi.TYPE_STRING),
+                            "email": openapi.Schema(type=openapi.TYPE_STRING),
+                            "persona": openapi.Schema(type=openapi.TYPE_STRING), 
+                            "points" : openapi.Schema(type=openapi.TYPE_STRING), 
+                            "field_of_specialization": openapi.Schema(type=openapi.TYPE_STRING),
+                            "completed_quest_tags": openapi.Schema(type=openapi.TYPE_STRING)
                         }
                     )
                 )
@@ -248,8 +252,11 @@ def questRequests(request, id):
         user = ComManager.objects.get(id=payload['id'])
         if not user:
             return JsonResponse({"error": "User profile not found"}, status=404)
-        quest = QuestRegistration.objects.filter(quest_id=id)
-        return JsonResponse({"requests": list(quest.values())}, status=200)
+        
+        UserRequestsList = QuestRegistration.objects.filter(quest_id=id).all()
+        response = RequestSchema(UserRequestsList)
+        return JsonResponse({"requests": response}, status= 200)
+    
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
     
@@ -263,9 +270,6 @@ def updateStatus(status, user_id, quest_id):
     if str(status).lower() == "completed":
         user = User.objects.get(id=user_id)
         quest = Quest.objects.get(id=quest_id)
-        # user.update(active_quest=False)
-        # user.update(points=user.points + quest.points)
-        # user.update(completed_quest_tags=user.completed_quest_tags + quest.tags)
         user.active_quest = False
         user.points = user.points + quest.points
         user.completed_quest_tags = user.completed_quest_tags + quest.tags
