@@ -1,78 +1,73 @@
 import React, { useState } from "react";
 import "../css/register.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,NavLink } from "react-router-dom";
+import axios from "axios";
 
 function CMRegister() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     Name: "",
-    address: "",
-    gender: "",
+    location: "",
     dob: "",
-    pincode: "",
+    area: "",
     email: "",
     password: "",
-    re_password: "",
   });
 
   const handleInputChange = (e) => {
     const { name, value, type } = e.target;
 
-    if (type === "radio") {
+    // if (type === "radio") {
+    //   setFormData((prevData) => ({
+    //     ...prevData,
+    //     [name]: value,
+    //   }));
+    // } else {
       setFormData((prevData) => ({
         ...prevData,
         [name]: value,
       }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
+    // }
   };
 
   const handleSubmit = (e) => {
-    // console.log(payload);
-    navigate('/cm');
-    // axios({
-    //   url: "http://localhost:5000/auth/signup",
-    //   method: "POST",
-    //   data: formData,
-    // })
-    //   .then((response) => {
-    //     // console.log("Response is :", response.data._id);
-    //     // const lfsuser = response.data._id;
+    e.preventDefault();
+    // console.log(formData);
+    axios({
+      url: "api/commanager/register",
+      method: "POST",
+      data: formData,
+    })
+      .then((response) => {
+        // console.log("Response is :", response.data._id);
+        // const lfsuser = response.data._id;
 
-    //     // localStorage.setItem("lfsuserid",response.data._id);
-    //     setFormData({
-    //       Name: "",
-    //       address: "",
-    //       gender: "",
-    //       specialization: [],
-    //       dob: "",
-    //       pincode: "",
-    //       email: "",
-    //       password: "",
-    //       re_password: "",
-    //     });
-    //     navigate('/');
+        // localStorage.setItem("lfsuserid",response.data._id);
+        setFormData({
+          Name: "",
+          location: "",
+          dob: "",
+          area: "",
+          email: "",
+          password: "",
+        });
+        navigate('/cm');
 
-    //   })
-    //   .catch(() => {
-    //     console.log("Error occured");
-    //   });
+      })
+      .catch(() => {
+        alert('something went wrong please fill data again')
+        console.log("Error occured");
+      });
   };
 
   const handleReset = () => {
     setFormData({
       Name: "",
-      address: "",
-      gender: "",
+      location: "",
       dob: "",
-      pincode: "",
+      area: "",
       email: "",
       password: "",
-      re_password: "",
     });
   };
 
@@ -129,17 +124,17 @@ function CMRegister() {
                         <input
                           class="form-control form-control-lg"
                           type="text"
-                          name="address"
-                          value={formData.address}
+                          name="location"
+                          value={formData.location}
                           onChange={handleInputChange}
                           required
                         />
                         <label class="form-label" for="form3Example8">
-                          Address*
+                          location*
                         </label>
                       </div>
 
-                      <div className="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                      {/* <div className="d-md-flex justify-content-start align-items-center mb-4 py-2">
                         <h6 className="mb-0 me-4">Gender*: </h6>
 
                         <div className="form-check form-check-inline mb-0 me-4">
@@ -195,7 +190,7 @@ function CMRegister() {
                             Other
                           </label>
                         </div>
-                      </div>
+                      </div> */}
 
                       <div class="form-outline mb-4">
                         <input
@@ -207,21 +202,21 @@ function CMRegister() {
                           class="form-control form-control-lg"
                         />
                         <label class="form-label" for="form3Example9">
-                          DOB
+                          DOB*
                         </label>
                       </div>
 
                       <div class="form-outline mb-4">
                         <input
-                          type="number"
+                          type="string"
                           className="form-control form-control-lg"
-                          name="pincode"
-                          value={formData.pincode}
+                          name="area"
+                          value={formData.area}
                           onChange={handleInputChange}
                           required
                         />
                         <label class="form-label" for="form3Example90">
-                          Pincode*
+                          Area*
                         </label>
                       </div>
 
@@ -252,7 +247,7 @@ function CMRegister() {
                         </label>
                       </div>
 
-                      <div class="form-outline mb-4">
+                      {/* <div class="form-outline mb-4">
                         <input
                           className="form-control form-control-lg"
                           type="password"
@@ -264,7 +259,7 @@ function CMRegister() {
                         <label class="form-label" for="form3Example97">
                           confirme password*
                         </label>
-                      </div>
+                      </div> */}
 
                       <div className="d-flex justify-content-end pt-3">
                         <button
@@ -282,6 +277,11 @@ function CMRegister() {
                         </button>
                       </div>
                     </form>
+                    <ul>
+                      <li><NavLink to="/login">Already registered? user login</NavLink></li>
+                      <li><NavLink to="/cmlogin">Already registered? Community_manager login</NavLink></li>
+                      <li><NavLink to="/cmregister">Register as a User</NavLink></li>
+                    </ul>
                   </div>
                 </div>
               </div>

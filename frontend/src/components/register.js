@@ -1,52 +1,51 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,NavLink } from "react-router-dom";
 import "../css/register.css";
 
 function Register() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     Name: "",
-    address: "",
-    gender: "",
-    specialization: [],
+    location: "",
+    specialization: "",
+    persona: "",
     dob: "",
-    pincode: "",
     email: "",
     password: "",
-    re_password: "",
   });
 
   const handleInputChange = (e) => {
     const { name, value, type } = e.target;
 
-    if (type === "select-multiple") {
-      const selectedOptions = Array.from(
-        e.target.selectedOptions,
-        (option) => option.value
-      );
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: selectedOptions,
-      }));
-    } else if (type === "radio") {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
+    // if (type === "select-multiple") {
+    //   const selectedOptions = Array.from(
+    //     e.target.selectedOptions,
+    //     (option) => option.value
+    //   );
+    //   setFormData((prevData) => ({
+    //     ...prevData,
+    //     [name]: selectedOptions,
+    //   }));
+    // } else if (type === "radio") {
+    //   setFormData((prevData) => ({
+    //     ...prevData,
+    //     [name]: value,
+    //   }));
+    // } else {
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    // }
   };
 
   const handleSubmit = (e) => {
-    // console.log(payload);
+    e.preventDefault();
+    // console.log(formData);
     axios({
-      url: "http://localhost:5000/auth/signup",
+      url: "api/users/register",
       method: "POST",
       data: formData,
     })
@@ -57,19 +56,18 @@ function Register() {
         // localStorage.setItem("lfsuserid",response.data._id);
         setFormData({
           Name: "",
-          address: "",
-          gender: "",
-          specialization: [],
+          location: "",
+          specialization: "",
+          persona:"",
           dob: "",
-          pincode: "",
           email: "",
           password: "",
-          re_password: "",
         });
         navigate('/');
 
       })
       .catch(() => {
+        alert("something went wrong please refill the information")
         console.log("Error occured");
       });
   };
@@ -77,14 +75,12 @@ function Register() {
   const handleReset = () => {
     setFormData({
       Name: "",
-      address: "",
-      gender: "",
-      specialization: [],
+      location: "",
+      specialization: "",
+      persona: "",
       dob: "",
-      pincode: "",
       email: "",
       password: "",
-      re_password: "",
     });
   };
 
@@ -123,6 +119,7 @@ function Register() {
                               value={formData.Name}
                               onChange={handleInputChange}
                               required
+                              placeholder="XYZ"
                             />
                             <label
                               className="form-label"
@@ -139,17 +136,18 @@ function Register() {
                         <input
                           class="form-control form-control-lg"
                           type="text"
-                          name="address"
-                          value={formData.address}
+                          name="location"
+                          value={formData.location}
                           onChange={handleInputChange}
                           required
+                          placeholder="vil:XYZ dist:XYZ state:XYZ pincode:888888"
                         />
                         <label class="form-label" for="form3Example8">
-                          Address*
+                          location*
                         </label>
                       </div>
 
-                      <div className="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                      {/* <div className="d-md-flex justify-content-start align-items-center mb-4 py-2">
                         <h6 className="mb-0 me-4">Gender*: </h6>
 
                         <div className="form-check form-check-inline mb-0 me-4">
@@ -205,9 +203,9 @@ function Register() {
                             Other
                           </label>
                         </div>
-                      </div>
+                      </div> */}
 
-                      <div class="row">
+                      {/* <div class="row">
                         <div class="col-md-6 mb-4">
                           <select
                             name="specialization"
@@ -222,6 +220,20 @@ function Register() {
                             <option value="4">Option 3</option>
                           </select>
                         </div>
+                      </div> */}
+                      <div class="form-outline mb-4">
+                        <input
+                          type="string"
+                          name="specialization"
+                          value={formData.specialization}
+                          onChange={handleInputChange}
+                          required
+                          class="form-control form-control-lg"
+                          placeholder="write your specialization with comma  ',' separated"
+                        />
+                        <label class="form-label" for="form3Example9">
+                          Specialization*
+                        </label>
                       </div>
 
                       <div class="form-outline mb-4">
@@ -232,13 +244,28 @@ function Register() {
                           onChange={handleInputChange}
                           required
                           class="form-control form-control-lg"
+                          placeholder="mm/dd/yyyy"
                         />
                         <label class="form-label" for="form3Example9">
-                          DOB
+                          DOB*
                         </label>
                       </div>
 
                       <div class="form-outline mb-4">
+                        <input
+                          type="string"
+                          name="persona"
+                          value={formData.persona}
+                          onChange={handleInputChange}
+                          required
+                          class="form-control form-control-lg"
+                        />
+                        <label class="form-label" for="form3Example9">
+                          persona*
+                        </label>
+                      </div>
+
+                      {/* <div class="form-outline mb-4">
                         <input
                           type="number"
                           className="form-control form-control-lg"
@@ -250,7 +277,7 @@ function Register() {
                         <label class="form-label" for="form3Example90">
                           Pincode*
                         </label>
-                      </div>
+                      </div> */}
 
                       <div class="form-outline mb-4">
                         <input
@@ -260,6 +287,7 @@ function Register() {
                           value={formData.email}
                           onChange={handleInputChange}
                           required
+                          placeholder="123@gmail.com"
                         />
                         <label class="form-label" for="form3Example97">
                           Email ID*
@@ -273,23 +301,10 @@ function Register() {
                           value={formData.password}
                           onChange={handleInputChange}
                           required
+                          placeholder="use a strong password"
                         />
                         <label class="form-label" for="form3Example97">
                           password*
-                        </label>
-                      </div>
-
-                      <div class="form-outline mb-4">
-                        <input
-                          className="form-control form-control-lg"
-                          type="password"
-                          name="re_password"
-                          value={formData.re_password}
-                          onChange={handleInputChange}
-                          required
-                        />
-                        <label class="form-label" for="form3Example97">
-                          confirme password*
                         </label>
                       </div>
 
@@ -309,6 +324,11 @@ function Register() {
                         </button>
                       </div>
                     </form>
+                    <ul>
+                      <li><NavLink to="/login">Already registered? user login</NavLink></li>
+                      <li><NavLink to="/cmlogin">Already registered? Community_manager login</NavLink></li>
+                      <li><NavLink to="/cmregister">Register as a community manager</NavLink></li>
+                    </ul>
                     
                   </div>
                 </div>

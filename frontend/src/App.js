@@ -10,6 +10,7 @@ import PostQuest from "./components/PostQuest";
 import Applications from "./components/Applicatons";
 import CMRegister from "./components/CMregistrationform";
 import Login from "./components/Login";
+import CMLogin from "./components/CMlogin";
 import Myapplication from "./components/Myapplications";
 import Questpage from "./components/Questpage";
 import CMDashboard from "./components/Community_manager_dashbord";
@@ -22,9 +23,10 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='/cm' element={<CMDashboard/>} />
-        {/* <Route path='/register' element={<Register/>} /> */}
-        <Route path='/register' element={<CMRegister/>} />
+        <Route path='/register' element={<Register/>} />
+        <Route path='/cmregister' element={<CMRegister/>} />
         <Route path='/login' element={<Login/>} />
+        <Route path='/cmlogin' element={<CMLogin/>} />
         <Route path='/postquest' element={<PostQuest/>}  />
         <Route path='/applications' element={<Applications/>}  />
         <Route path='/myapplications' element={<Myapplication/>}  />

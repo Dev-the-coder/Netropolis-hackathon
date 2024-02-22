@@ -3,7 +3,8 @@ import "../css/register.css"; // Assuming you have a CSS file for styling
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-function Login() {
+
+function CMLogin() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -20,9 +21,9 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    // console.log(formData);
     axios({
-      url: "api/users/login",
+      url: "api/commanager/login",
       method: "POST",
       data: formData,
     })
@@ -35,7 +36,7 @@ function Login() {
           email: "",
           password: "",
         });
-        navigate('/');
+        navigate('/cm');
 
       })
       .catch(() => {
@@ -64,7 +65,7 @@ function Login() {
                 </div>
                 <div className="col-xl-6">
                   <div className="card-body p-md-5 text-black">
-                    <h3 className="mb-5 text-uppercase">User Login form</h3>
+                    <h3 className="mb-5 text-uppercase">Community_manager Login form</h3>
                     <form onSubmit={handleSubmit}>
                       <div className="form-outline mb-4">
                         <input
@@ -100,14 +101,13 @@ function Login() {
                           className="btn btn-warning btn-lg ms-2"
                           
                         >
-                          User Login
+                          community manager Login
                         </button>
                       </div>
-
                       
                     </form>
                     <ul>
-                      <li><NavLink to="/cmlogin">login as community manager</NavLink></li>
+                      <li><NavLink to="/login">login as a user</NavLink></li>
                       <li><NavLink to="/register">new user please register first</NavLink></li>
                       <li><NavLink to="/cmregister">new community manager please register first</NavLink></li>
                     </ul>
@@ -122,4 +122,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default CMLogin;

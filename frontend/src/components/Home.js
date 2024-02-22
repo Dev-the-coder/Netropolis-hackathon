@@ -14,9 +14,11 @@ import Login from "./Login";
 import Applications from "./Applicatons";
 function Home(){
     return(<>
-        <NavbarUI/>
+        {/* <NavbarUI/>
         <Questboard/>
-        <Footer/>
+        <Footer/> */}
+        {/* <CMRegister/> */}
+        <Login/>
     </>)
 }
 
