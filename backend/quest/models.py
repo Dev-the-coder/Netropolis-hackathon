@@ -10,7 +10,7 @@ class Quest(models.Model):
     description = models.CharField(max_length=1000)
     points = models.IntegerField()
     fee = models.IntegerField()
-    allowance = models.IntegerField()
+    allowance = models.CharField(max_length=1024)
     tags = models.CharField(max_length=100)
     comManagerId = models.IntegerField()
 

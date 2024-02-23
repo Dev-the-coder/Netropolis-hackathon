@@ -137,7 +137,7 @@ def getuser(request):
                             'description': openapi.Schema(type=openapi.TYPE_STRING),
                             'points': openapi.Schema(type=openapi.TYPE_INTEGER),
                             'fee': openapi.Schema(type=openapi.TYPE_INTEGER),
-                            'allowance': openapi.Schema(type=openapi.TYPE_INTEGER),
+                            'allowance': openapi.Schema(type=openapi.TYPE_STRING),
                             'tags': openapi.Schema(type=openapi.TYPE_STRING),
                             'comManagerId': openapi.Schema(type=openapi.TYPE_INTEGER)
                         }))}),

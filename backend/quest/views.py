@@ -29,7 +29,7 @@ from users.models import User
             'description': openapi.Schema(type=openapi.TYPE_STRING),
             'points': openapi.Schema(type=openapi.TYPE_INTEGER),
             'fee': openapi.Schema(type=openapi.TYPE_INTEGER),
-            'allowance': openapi.Schema(type=openapi.TYPE_INTEGER),
+            'allowance': openapi.Schema(type=openapi.TYPE_STRING),
             'tags': openapi.Schema(type=openapi.TYPE_STRING)
         },
         required=['datetime', 'location', 'provided_by', 'title', 'duration', 'description', 'points', 'fee', 'allowance', 'tags']
@@ -87,7 +87,7 @@ def createQuest(request):
                             'description': openapi.Schema(type=openapi.TYPE_STRING),
                             'points': openapi.Schema(type=openapi.TYPE_INTEGER),
                             'fee': openapi.Schema(type=openapi.TYPE_INTEGER),
-                            'allowance': openapi.Schema(type=openapi.TYPE_INTEGER),
+                            'allowance': openapi.Schema(type=openapi.TYPE_STRING),
                             'tags': openapi.Schema(type=openapi.TYPE_STRING),
                             'comManagerId': openapi.Schema(type=openapi.TYPE_INTEGER)
                         }
