@@ -24,7 +24,7 @@ function CMLogin() {
     e.preventDefault();
     // console.log(formData);
     axios({
-      url: `${API}/commanager/login`,
+      url: `${API}/commanager/login/`,
       method: "POST",
       data: formData,
     })

@@ -20,8 +20,8 @@ import Pagenotfound from "./components/Pagenotfound";
 import UserProfile from "./components/Profile";
 
 function Router() {
-  // const { loggedIn } = useContext(AuthContext);
-  const loggedIn = true;
+  const { loggedIn } = useContext(AuthContext);
+  // const loggedIn = true;
   return (
     <>
       <BrowserRouter>

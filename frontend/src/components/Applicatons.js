@@ -7,8 +7,8 @@ import CMNavbar from "./CM_Navbar";
 import UserCard from "./User_Card";
 
 const Applications = () => {
-  // const [request, setRequest] = useState([]);
-  const request = [{}, {}, {}];
+  const [request, setRequest] = useState([]);
+  // const request = [{}, {}, {}];
   const params = useParams();
   const questId = params.questId;
   const token = localStorage.getItem("netropolis_token");
@@ -16,12 +16,13 @@ const Applications = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API}/quest/request/${questId}`, {
+        const response = await axios.get(`${API}/quest/requests/${questId}`, {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: token,
             "Content-Type": "application/json",
           },
         });
+        setRequest(response.data.requests);
         // setRequest(response.data);
       } catch (error) {
         console.error("Error:", error);

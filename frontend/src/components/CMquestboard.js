@@ -234,7 +234,7 @@ const CMQuestboard = () => {
       })
       .then((response) => {
         // Handle successful response
-        setArr(response.data);
+        setArr(response.data.quests);
       })
       .catch((error) => {
         // Handle error
@@ -322,7 +322,7 @@ const CMQuestboard = () => {
                 rewards={quest.rewards}
                 points={quest.points}
                 location={quest.location}
-                noofapplicants={quest.noc}
+                // noofapplicants={quest.noc}
               />
             );
           })}
