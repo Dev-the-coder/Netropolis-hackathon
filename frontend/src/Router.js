@@ -18,6 +18,7 @@ import AuthContext from "./context/AuthContext";
 import Approved_Application from "./components/Approved_Application";
 import Pagenotfound from "./components/Pagenotfound";
 import UserProfile from "./components/Profile";
+import CMProfile from "./components/CMprofile";
 
 function Router() {
   const { loggedIn } = useContext(AuthContext);
@@ -54,6 +55,7 @@ function Router() {
               <Route path="/questpage" element={<Questpage />} />
               <Route path="/approvedapplication" element={<Approved_Application />} />
               <Route path="/userprofile" element={<UserProfile/>} />
+              <Route path="/cmprofile" element={<CMProfile/>} />
 
               <Route path="*" element={<Pagenotfound/>}/>
 

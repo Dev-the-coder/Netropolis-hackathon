@@ -84,8 +84,8 @@ const CMNavbar = () => {
               </li>
               <li>
                 {loggedIn ? (
-                  <NavLink to="/userprofile">
-                    your profile
+                  <NavLink to="/cmprofile">
+                    Profile
                   </NavLink>
                 ) : <></>}
               </li>

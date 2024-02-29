@@ -8,7 +8,7 @@ import { API } from "../API";
 const QuestCard = (props) => {
   const Navigate = useNavigate();
   const id = props.id;
-  var CM = true;
+
   const handleClick = () => {
     // console.log("hii");
     const payload = {
@@ -16,7 +16,8 @@ const QuestCard = (props) => {
     };
 
     const token = localStorage.getItem("netropolis_token");
-    axios
+    if(token){
+      axios
       .post({ API } + "/quest/register", payload, {
         headers: {
           Authorization: { token },
@@ -27,6 +28,11 @@ const QuestCard = (props) => {
       .catch((err) => {
         console.log(err);
       });
+    }
+    else{
+      Navigate('/login')
+    }
+    
   };
   return (
     <div className="col-4">
@@ -52,6 +58,11 @@ const QuestCard = (props) => {
               <span>Location : </span>
               {props.location}
             </Card.Subtitle>
+            <Card.Subtitle className="mb-2 text-muted quest-card-subtitle">
+              <span>description : </span>
+              {props.description}
+            </Card.Subtitle>
+
             <Button variant="contained" onClick={handleClick}>
               Apply
             </Button>
