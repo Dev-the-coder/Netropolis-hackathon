@@ -69,3 +69,7 @@ const QuestCard = (props) => {
 };
 
 export default QuestCard;
+
+
+
+
