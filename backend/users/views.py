@@ -18,6 +18,7 @@ from drf_yasg import openapi
         properties={
             'name': openapi.Schema(type=openapi.TYPE_STRING),
             'dob': openapi.Schema(type=openapi.TYPE_STRING),
+            'gender': openapi.Schema(type=openapi.TYPE_STRING),
             'persona': openapi.Schema(type=openapi.TYPE_STRING),
             'location': openapi.Schema(type=openapi.TYPE_STRING),
             'field_of_specialization': openapi.Schema(type=openapi.TYPE_STRING),
@@ -95,6 +96,7 @@ def login(request):
             properties={
                 'name': openapi.Schema(type=openapi.TYPE_STRING),
                 'dob': openapi.Schema(type=openapi.TYPE_STRING),
+                'gender': openapi.Schema(type=openapi.TYPE_STRING),
                 'persona': openapi.Schema(type=openapi.TYPE_STRING),
                 'location': openapi.Schema(type=openapi.TYPE_STRING),
                 'field_of_specialization': openapi.Schema(type=openapi.TYPE_STRING),
@@ -122,6 +124,7 @@ def get_user(request):
         return JsonResponse({
             "name": user.name,
             "dob": user.dob,
+            "gender": user.gender,
             "persona": user.persona,
             "location": user.location,
             "points": user.points,

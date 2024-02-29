@@ -42,6 +42,7 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('commanager/', include('commanager.urls')),
     path('quest/', include('quest.urls')),
+    path('search/', include('search.urls')),
     path('', doctor, name='doctor'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),

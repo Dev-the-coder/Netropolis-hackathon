@@ -3,6 +3,7 @@ from django.db import models
 class ComManager(models.Model):
     name = models.CharField(max_length=100)
     dob = models.DateField()
+    gender = models.CharField(max_length=100, default="Male")
     location = models.CharField(max_length=100)
     area = models.CharField(max_length=100)
     email = models.EmailField(unique=True)

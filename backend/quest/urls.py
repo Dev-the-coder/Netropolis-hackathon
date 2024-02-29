@@ -6,5 +6,5 @@ urlpatterns = [
     path('all/', views.allQuest),
     path('register/', views.questRequest),
     path('questaction/', views.questRequestAction, name='questaction'),
-    path('requests/<int:id>/', views.questRequests, name='quest'),
+    path('requests/<int:id>/', views.questRequests, name='quest')
 ]

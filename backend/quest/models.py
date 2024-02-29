@@ -10,7 +10,7 @@ class Quest(models.Model):
     description = models.CharField(max_length=1000)
     points = models.IntegerField()
     fee = models.IntegerField()
-    allowance = models.IntegerField()
+    allowance = models.CharField(max_length=1024)
     tags = models.CharField(max_length=100)
     comManagerId = models.IntegerField()
 
@@ -25,3 +25,20 @@ class QuestRegistration(models.Model):
     class Meta:
         unique_together = ('quest', 'user')
         db_table = "quest_registration"
+
+# response Model for Request response
+def RequestSchema(query):
+    response = []
+    for req in query:
+        response_obj = {
+            "accepted": req.status,
+            "user_id": req.user.id,
+            "username": req.user.name,
+            "email": req.user.email,
+            "persona": req.user.persona, 
+            "points" : req.user.points, 
+            "field_of_specialization": req.user.field_of_specialization,
+            "completed_quest_tags": req.user.completed_quest_tags
+        }
+        response.append(response_obj)
+    return response

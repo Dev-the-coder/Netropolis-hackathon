@@ -18,6 +18,7 @@ from drf_yasg import openapi
         properties={
             'name': openapi.Schema(type=openapi.TYPE_STRING),
             'dob': openapi.Schema(type=openapi.TYPE_STRING),
+            'gender': openapi.Schema(type=openapi.TYPE_STRING),
             'location': openapi.Schema(type=openapi.TYPE_STRING),
             'area': openapi.Schema(type=openapi.TYPE_STRING),
             'email': openapi.Schema(type=openapi.TYPE_STRING),
@@ -87,6 +88,7 @@ def login(request):
             properties={
                 'name': openapi.Schema(type=openapi.TYPE_STRING),
                 'dob': openapi.Schema(type=openapi.TYPE_STRING),
+                'gender': openapi.Schema(type=openapi.TYPE_STRING),
                 'location': openapi.Schema(type=openapi.TYPE_STRING),
                 'area': openapi.Schema(type=openapi.TYPE_STRING),
                 'email': openapi.Schema(type=openapi.TYPE_STRING)
@@ -105,7 +107,7 @@ def getuser(request):
             if payload['role'] != 'commanager':
                 return JsonResponse({"error": "Invalid token"}, status=400)
             user = ComManager.objects.get(id=payload['id'])
-            return JsonResponse({"name": user.name, "dob": user.dob, "location": user.location, "area": user.area, "email": user.email}, status=200)
+            return JsonResponse({"name": user.name, "dob": user.dob, "gender": user.gender, "location": user.location, "area": user.area, "email": user.email}, status=200)
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
     else:
@@ -135,7 +137,7 @@ def getuser(request):
                             'description': openapi.Schema(type=openapi.TYPE_STRING),
                             'points': openapi.Schema(type=openapi.TYPE_INTEGER),
                             'fee': openapi.Schema(type=openapi.TYPE_INTEGER),
-                            'allowance': openapi.Schema(type=openapi.TYPE_INTEGER),
+                            'allowance': openapi.Schema(type=openapi.TYPE_STRING),
                             'tags': openapi.Schema(type=openapi.TYPE_STRING),
                             'comManagerId': openapi.Schema(type=openapi.TYPE_INTEGER)
                         }))}),
