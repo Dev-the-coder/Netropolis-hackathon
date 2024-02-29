@@ -24,7 +24,7 @@ const CMQuestCard = (props) => {
       })
       .then(Navigate("/myapplications"))
       .catch((err) => {
-        console.log(err);
+        console.log("Error has happened", err);
       });
   };
   return (

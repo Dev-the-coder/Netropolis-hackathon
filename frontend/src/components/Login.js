@@ -30,7 +30,7 @@ function Login() {
     })
       .then((response) => {
         console.log(response);
-        localStorage.setItem("netropolis_token",response.token);
+        localStorage.setItem("netropolis_token",response.data.token);
         setFormData({
           email: "",
           password: "",
