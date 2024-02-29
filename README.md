@@ -4,6 +4,9 @@
 
 The Netropolis Community project aims to address the challenges stemming from Japan's unique demographic landscape characterized by an aging population and declining birthrate. As a consequence of this demographic shift, local cities are witnessing depopulation, leading to a dwindling workforce. This trend poses a significant threat to the maintenance of local economies, cultures, and histories, particularly in rural areas where labor scarcity is acute. Netropolis seeks to tackle this challenge by attracting individuals from outside the region to contribute to local communities and revitalize their economy, culture, and heritage.
 
+![image](https://github.com/Pranay-Pandey/Netropolis-hackathon/assets/79053599/612c29e6-bf32-43f3-863b-95fedb986b5c)
+
+
 ## Goal
 
 The overarching goal of the Netropolis Community project is to develop a comprehensive matching platform that facilitates the connection between local labor shortages and individuals interested in experiencing and contributing to the local community. The platform is designed to emulate the immersive experience of an RPG game, where users can explore quests and activities tailored to their interests while simultaneously addressing local labor needs. Specific objectives include:
@@ -131,4 +134,24 @@ The Search app enhances user experience by enabling quest discovery through keyw
 ### Documentation
 
 The backend API is thoroughly documented using Swagger, providing comprehensive guidance on available endpoints, request parameters, and response formats. The documentation is accessible at [Netropolis Backend Swagger](https://netropolis-backend.vercel.app/swagger), offering developers and stakeholders insights into the platform's functionalities and integration possibilities. This documentation is also available in the backend directory [here](https://github.com/Pranay-Pandey/Netropolis-hackathon/blob/main/backend/readme.md)
+
+
+## DEMO
+
+
+
+https://github.com/Pranay-Pandey/Netropolis-hackathon/assets/79053599/2e98bd96-6631-479b-a79a-ddc9713606d3
+
+
+
+## Screenshots
+
+![image](https://github.com/Pranay-Pandey/Netropolis-hackathon/assets/79053599/af8d751a-936e-4b41-ae4b-f848452f516b)
+
+
+![image](https://github.com/Pranay-Pandey/Netropolis-hackathon/assets/79053599/d768fac3-9444-4183-ae18-d45bbd1d4632)
+
+![image](https://github.com/Pranay-Pandey/Netropolis-hackathon/assets/79053599/d178e2e2-1c10-4418-9a38-69c39acf558a)
+
+![image](https://github.com/Pranay-Pandey/Netropolis-hackathon/assets/79053599/12ebcc82-8f77-4a21-8c8d-5794711d5096)
 
