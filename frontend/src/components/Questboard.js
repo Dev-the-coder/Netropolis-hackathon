@@ -124,7 +124,7 @@ const Questboard = () => {
                 id={quest.id}
                 title={quest.title}
                 duration={quest.duration}
-                rewards={quest.points}
+                fee={quest.fee}
                 points={quest.points}
                 location={quest.location}
                 description={quest.description}

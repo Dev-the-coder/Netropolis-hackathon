@@ -48,11 +48,11 @@ const QuestCard = (props) => {
             </Card.Subtitle>
             <Card.Subtitle className="mb-2 text-muted quest-card-subtitle">
               <span>Points : </span>
-              {props.rewards}
+              {props.points}
             </Card.Subtitle>
             <Card.Subtitle className="mb-2 text-muted quest-card-subtitle">
-              <span>Points : </span>
-              {props.points}
+              <span>Fee : </span>
+              {props.fee}
             </Card.Subtitle>
             <Card.Subtitle className="mb-2 text-muted quest-card-subtitle">
               <span>Location : </span>

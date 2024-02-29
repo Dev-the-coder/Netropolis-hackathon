@@ -22,8 +22,8 @@ const CMQuestCard = (props) => {
               {props.duration}
             </Card.Subtitle>
             <Card.Subtitle className="mb-2 text-muted quest-card-subtitle">
-              <span>Reward : </span>
-              {props.rewards}
+              <span>Fee : </span>
+              {props.fee}
             </Card.Subtitle>
             <Card.Subtitle className="mb-2 text-muted quest-card-subtitle">
               <span>Points : </span>
