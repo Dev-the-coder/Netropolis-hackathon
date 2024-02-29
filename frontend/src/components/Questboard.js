@@ -271,14 +271,13 @@ const Questboard = () => {
     
 
     const apiUrl = {API}+'/search/deepSearch';
-    const phrase = title + " " + location;
     
 
     axios({
-      method: "get",
+      method: "post",
       url: apiUrl,
       body:{
-        phrase:phrase
+        phrase:title
       },
     })
       .then((response) => {
@@ -299,21 +298,21 @@ const Questboard = () => {
             <input
               type="text"
               name="title"
-              placeholder="job title"
+              placeholder="search quest"
               value={title}
               onChange={handleChange}
             />
-            <input
+            {/* <input
               type="text"
               name="location"
               placeholder="location"
               onChange={handleChange}
-            />
-            <Button variant="contained" onClick={handleClick}>
+            /> */}
+            <Button variant="primary"onClick={handleClick}>
               Search
             </Button>
           </form>
-          <p>browse job offers by title or location</p>
+          <p>browse job offers by title</p>
         </div>
       </div>
 

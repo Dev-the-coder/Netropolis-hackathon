@@ -16,6 +16,8 @@ import Questpage from "./components/Questpage";
 import CMDashboard from "./components/Community_manager_dashbord";
 import AuthContext from "./context/AuthContext";
 import Approved_Application from "./components/Approved_Application";
+import Pagenotfound from "./components/Pagenotfound";
+import UserProfile from "./components/Profile";
 
 function Router() {
   // const { loggedIn } = useContext(AuthContext);
@@ -33,23 +35,27 @@ function Router() {
               <Route path="/cmregister" element={<CMRegister />} />
               <Route path="/login" element={<Login />} />
               <Route path="/cmlogin" element={<CMLogin />} />
-              <Route path="/footer" element={<Footer />} />
+              <Route path="*" element={<Pagenotfound/>}/>
+              {/* <Route path="/footer" element={<Footer />} /> */}
             </>
           ) : (
             <>
               <Route path="/" element={<Home />} />
               <Route path="/cm" element={<CMDashboard />} />
-              <Route path="/register" element={<Register />} />
+              {/* <Route path="/register" element={<Register />} />
               <Route path="/cmregister" element={<CMRegister />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/cmlogin" element={<CMLogin />} />
+              <Route path="/cmlogin" element={<CMLogin />} /> */}
               <Route path="/postquest" element={<PostQuest />} />
               {/* <Route path='/itempage/:itemId' element={<ItemPage/>}  /> */}
               <Route path="/applications/:questId" element={<Applications />} />
               <Route path="/myapplications" element={<Myapplication />} />
-              <Route path="/footer" element={<Footer />} />
+              {/* <Route path="/footer" element={<Footer />} /> */}
               <Route path="/questpage" element={<Questpage />} />
               <Route path="/approvedapplication" element={<Approved_Application />} />
+              <Route path="/userprofile" element={<UserProfile/>} />
+
+              <Route path="*" element={<Pagenotfound/>}/>
 
             </>
           )}

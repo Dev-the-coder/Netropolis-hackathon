@@ -1,3 +1,12 @@
+.applicationcontainer{
+    display: grid;
+    grid-template-columns: 26rem  20rem;
+}
+
+.applicationrow{
+    grid-column: 2/5;
+}
+
 .applications{
     /* background-color: yellow; */
     /* margin-top: 122px; */
@@ -6,6 +15,12 @@
     min-height: 390px;
     padding-left: 17px;
     background-color: aliceblue;
+}
+
+#title{
+    font-size: 69px;
+    text-align: center;
+    font-weight: 600;
 }
 
 .applications h1{

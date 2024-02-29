@@ -82,6 +82,13 @@ const CMNavbar = () => {
                   <NavLink to="/register">sign in/register</NavLink>
                 )}
               </li>
+              <li>
+                {loggedIn ? (
+                  <NavLink to="/userprofile">
+                    your profile
+                  </NavLink>
+                ) : <></>}
+              </li>
             </ul>
           </div>
         </nav>

@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   
-  var [loggedIn,setloggedIn] = useState(true);
+  var [loggedIn,setloggedIn] = useState(false);
   // var [CM,setCM] = useState(false);
 
 
@@ -81,6 +81,13 @@ const Navbar = () => {
                 ) : (
                   <NavLink to="/register">sign in/register</NavLink>
                 )}
+              </li>
+              <li>
+                {loggedIn ? (
+                  <NavLink to="/userprofile">
+                    your profile
+                  </NavLink>
+                ) : <></>}
               </li>
             </ul>
           </div>

@@ -285,7 +285,7 @@ const CMQuestboard = () => {
   };
   return (
     <>
-      <div className="Questboardsearchbox">
+      {/* <div className="Questboardsearchbox">
         <div className="Questboardsearchbar">
           <h1>Find the job thats fits for your life</h1>
           <h2>We offer thousands of jobs vacancies right now</h2>
@@ -309,7 +309,7 @@ const CMQuestboard = () => {
           </form>
           <p>browse job offers by title or location</p>
         </div>
-      </div>
+      </div> */}
 
       <div className="container questboardcontainer">
         <div className="row questboardrow">

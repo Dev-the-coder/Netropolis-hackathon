@@ -87,7 +87,7 @@ const UserCard = (props) => {
   };
 
   return (
-    <div className="col-4">
+    <div className="col-6">
       <div className="card my-10" style={{ marginTop: "3rem" }}>
         <Card className="quest-card">
           <Card.Body>

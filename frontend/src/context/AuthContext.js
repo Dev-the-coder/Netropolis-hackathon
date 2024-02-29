@@ -12,6 +12,8 @@ function AuthContextProvider(props) {
     const token = localStorage.getItem("netropolis_token");
     if(token){
       setLoggedIn(true);
+    }else{
+      setLoggedIn(false);
     }
     
     
