@@ -230,7 +230,7 @@ const Questboard = () => {
         const response = await axios.get(apiEndpoint);
 
         // Assuming the response data is an array, update the state with the fetched data
-        setData(response.data);
+        setData(response.data.quests);
       } catch (error) {
         // If an error occurs, update the state with the error information
         setError(error);
@@ -320,7 +320,7 @@ const Questboard = () => {
 
       <div className="container questboardcontainer">
         <div className="row questboardrow">
-          {arr.map((quest) => {
+          {data.map((quest) => {
             return (
               <QuestCard
                 id={quest.id}
