@@ -7,8 +7,7 @@ import CMNavbar from "./CM_Navbar";
 import UserCard from "./User_Card";
 
 const Applications = () => {
-  // const [request, setRequest] = useState([]);
-  const request = [{}, {}, {}];
+  const [request, setRequest] = useState([]);
   const params = useParams();
   const questId = params.questId;
   const token = localStorage.getItem("netropolis_token");
@@ -22,7 +21,7 @@ const Applications = () => {
             "Content-Type": "application/json",
           },
         });
-        // setRequest(response.data.requests);
+        setRequest(response.data.requests);
         // setRequest(response.data);
       } catch (error) {
         console.error("Error:", error);
