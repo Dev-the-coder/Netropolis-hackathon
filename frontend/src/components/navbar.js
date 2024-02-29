@@ -66,22 +66,12 @@ const Navbar = () => {
                 <NavLink to="/">Home</NavLink>
               </li>
               <li>
-                <NavLink to="/footer">Contacts</NavLink>
-              </li>
-              <li>
                 {loggedIn ? (
                   <NavLink to="/myapplications">My-applications</NavLink>
                 ):(
                   <></>
                 )}
               </li>
-              {/* <li>
-                {loggedIn && CM ? (
-                  <NavLink to="/postquest">post quest</NavLink>
-                ) : (
-                  <></>
-                )}
-              </li> */}
               <li>
                 {loggedIn ? (
                   <NavLink onClick={signout} to="/">

@@ -63,16 +63,6 @@ const CMNavbar = () => {
                 <NavLink to="/">Home</NavLink>
               </li>
               <li>
-                <NavLink to="/footer">Contacts</NavLink>
-              </li>
-              <li>
-                {loggedIn ? (
-                  <NavLink to="/approvedapplication">Approved-applications</NavLink>
-                ):(
-                  <></>
-                )}
-              </li>
-              <li>
                 {loggedIn ? (
                   <NavLink to="/postquest">post quest</NavLink>
                 ) : (

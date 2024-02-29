@@ -62,7 +62,7 @@ function Router() {
             </>
           )}
         </Routes>
-        {/* <Footer/> */}
+        <Footer/>
       </BrowserRouter>
     </>
   );
