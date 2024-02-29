@@ -18,9 +18,9 @@ const QuestCard = (props) => {
     const token = localStorage.getItem("netropolis_token");
     if(token){
       axios
-      .post({ API } + "/quest/register", payload, {
+      .post(`${API}/quest/register/`, payload, {
         headers: {
-          Authorization: { token },
+          "Authorization": token,
           "Content-Type": "application/json",
         },
       })
