@@ -1,10 +1,10 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import axios from "axios";
 import { useNavigate, NavLink } from "react-router-dom";
 import "../css/userregister.css";
 import { API } from "../API";
-import "../context/AuthContext"
+import AuthContext from "../context/AuthContext";
 
 function Register() {
   const { getLoggedIn } = useContext(AuthContext);

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import "../css/userregister.css";
 import { useNavigate,NavLink } from "react-router-dom";
 import axios from "axios";
 import { API } from "../API";
-import "../context/AuthContext"
+import AuthContext from "../context/AuthContext";
 
 function CMRegister() {
   const { getLoggedIn } = useContext(AuthContext);

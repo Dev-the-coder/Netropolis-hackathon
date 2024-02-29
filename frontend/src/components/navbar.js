@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import "../css/navbar.css";
 import { Button } from "react-bootstrap";
 
 import { NavLink,useNavigate} from "react-router-dom";
-import "../context/AuthContext"
+import AuthContext from "../context/AuthContext";
 
 
 const Navbar = () => {

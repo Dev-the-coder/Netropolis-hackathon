@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import "../css/register.css"; // Assuming you have a CSS file for styling
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { API } from "../API";
 import "../css/userlogin.css"; 
-import "../context/AuthContext"
+import AuthContext from "../context/AuthContext";
 
 function CMLogin() {
   const { getLoggedIn } = useContext(AuthContext);
