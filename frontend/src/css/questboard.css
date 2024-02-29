@@ -6,7 +6,7 @@
 .Questboardsearchbox{
     /* margin-top: 1rem; */
     background-color: rgba(197, 240, 240, 0.755);
-    display: grid;
+    display: flex;
     grid-template-columns: 26rem  20rem;
 }
 .Questboardsearchbar{

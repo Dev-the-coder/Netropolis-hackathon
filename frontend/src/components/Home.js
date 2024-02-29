@@ -8,7 +8,7 @@ import UserCard from "./User_Card";
 function Home(){
     return(<>
         <Navbar/>
-        <UserCard/>
+        <Questboard/>
     </>)
 }
 

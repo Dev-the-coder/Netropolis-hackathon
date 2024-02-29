@@ -5,10 +5,9 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import { API } from "../API";
 
-const QuestCard = (props) => {
+const CMQuestCard = (props) => {
   const Navigate = useNavigate();
   const id = props.id;
-  var CM = true;
   const handleClick = () => {
     // console.log("hii");
     const payload = {
@@ -52,9 +51,9 @@ const QuestCard = (props) => {
               <span>Location : </span>
               {props.location}
             </Card.Subtitle>
-            <Button variant="contained" onClick={handleClick}>
-              Apply
-            </Button>
+            <Link to={"/applications/" + id}>
+              Applications <span>: {props.noofapplicants}</span>
+            </Link>
           </Card.Body>
         </Card>
       </div>
@@ -62,4 +61,4 @@ const QuestCard = (props) => {
   );
 };
 
-export default QuestCard;
+export default CMQuestCard;

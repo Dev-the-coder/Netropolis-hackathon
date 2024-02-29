@@ -2,12 +2,12 @@ import React from "react";
 
 
 import CMNavbar from "./CM_Navbar";
-import Questboard from "./Questboard";
+import CMQuestboard from "./CMquestboard";
 
 const CMDashboard = ()=>{
     return <>
         <CMNavbar/>
-        <Questboard/>
+        <CMQuestboard/>
     </>;
 }
 
