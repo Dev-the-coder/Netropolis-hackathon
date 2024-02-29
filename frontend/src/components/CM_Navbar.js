@@ -2,21 +2,25 @@ import React, { useEffect, useState } from "react";
 import "../css/navbar.css";
 import { Button } from "react-bootstrap";
 
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
+import "../context/AuthContext"
 
 const CMNavbar = () => {
-  
-  var [loggedIn,setloggedIn] = useState(false);
+  const Navigate = useNavigate();
+  const { getLoggedIn } = useContext(AuthContext);
+  const { loggedIn } = useContext(AuthContext);
+  // var [loggedIn,setloggedIn] = useState(false);
 //   var [CM,setCM] = useState(false);
 
 
   useEffect(()=>{
-    const token = localStorage.getItem("netropolis_token");
-    console.log(token)
-    if(token){
-      setloggedIn(true);
-      // agar wo cm h to set cm = true as well
-    }
+    // const token = localStorage.getItem("netropolis_token");
+    // console.log(token)
+    // if(token){
+    //   setloggedIn(true);
+    //   // agar wo cm h to set cm = true as well
+    // }
+    getLoggedIn();
   },[]);
 
 
@@ -25,8 +29,10 @@ const CMNavbar = () => {
     // setConstraint(false);
 
     localStorage.removeItem("netropolis_token")
-    console.log("Signed out !");
-    setloggedIn(false);
+    // console.log("Signed out !");
+    // setloggedIn(false);
+    getLoggedIn();
+    Navigate('/cm');
     // setCM(false);
     // axios({
     //   url: "http://localhost:5000/signout",

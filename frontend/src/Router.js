@@ -43,10 +43,10 @@ function Router() {
             <>
               <Route path="/" element={<Home />} />
               <Route path="/cm" element={<CMDashboard />} />
-              {/* <Route path="/register" element={<Register />} />
+              <Route path="/register" element={<Register />} />
               <Route path="/cmregister" element={<CMRegister />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/cmlogin" element={<CMLogin />} /> */}
+              <Route path="/cmlogin" element={<CMLogin />} />
               <Route path="/postquest" element={<PostQuest />} />
               {/* <Route path='/itempage/:itemId' element={<ItemPage/>}  /> */}
               <Route path="/applications/:questId" element={<Applications />} />

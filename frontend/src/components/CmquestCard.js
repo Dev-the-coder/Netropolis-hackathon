@@ -8,25 +8,7 @@ import { API } from "../API";
 const CMQuestCard = (props) => {
   const Navigate = useNavigate();
   const id = props.id;
-  const handleClick = () => {
-    // console.log("hii");
-    const payload = {
-      quest_id: props.id,
-    };
 
-    const token = localStorage.getItem("netropolis_token");
-    axios
-      .post({ API } + "/quest/register", payload, {
-        headers: {
-          Authorization: { token },
-          "Content-Type": "application/json",
-        },
-      })
-      .then(Navigate("/myapplications"))
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   return (
     <div className="col-4">
       <div class="card my-10" style={{ marginTop: "3rem" }}>

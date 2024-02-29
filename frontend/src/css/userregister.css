@@ -1,0 +1,20 @@
+.userregister h3{
+    font-size: 29px;
+}
+
+.userregister label{
+    font-size: 18px;
+}
+.userregister ul{
+    margin-left: -50px;
+    margin-top: -39px;
+    font-size: 15px;
+}
+.userregister ul li{
+    border: 2px solid blue;
+    display: block;
+    width: 317px;
+    margin: 9px;
+    background: rgb(197 197 215);
+    font-size: 13px;
+}

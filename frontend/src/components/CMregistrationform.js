@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import "../css/register.css";
+import "../css/userregister.css";
 import { useNavigate,NavLink } from "react-router-dom";
 import axios from "axios";
 import { API } from "../API";
+import "../context/AuthContext"
 
 function CMRegister() {
+  const { getLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -52,6 +54,7 @@ function CMRegister() {
           email: "",
           password: "",
         });
+        getLoggedIn();
         navigate('/cm');
 
       })
@@ -91,7 +94,7 @@ function CMRegister() {
                   />
                 </div>
                 <div className="col-xl-6">
-                  <div className="card-body p-md-5 text-black">
+                  <div className="card-body p-md-5 text-black userregister">
                     <h3 className="mb-5 text-uppercase">
                       Community_manager registration form
                     </h3>

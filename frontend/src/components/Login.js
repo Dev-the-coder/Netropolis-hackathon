@@ -3,9 +3,11 @@ import "../css/userlogin.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import "../context/AuthContext"
 
 import { API } from "../API";
 function Login() {
+  const { getLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -35,6 +37,7 @@ function Login() {
           email: "",
           password: "",
         });
+        getLoggedIn();
         navigate('/');
 
       })

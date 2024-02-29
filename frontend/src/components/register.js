@@ -1,11 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate,NavLink } from "react-router-dom";
-import "../css/register.css";
+import { useNavigate, NavLink } from "react-router-dom";
+import "../css/userregister.css";
 import { API } from "../API";
+import "../context/AuthContext"
 
 function Register() {
+  const { getLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -53,21 +55,21 @@ function Register() {
       },
     })
       .then((response) => {
-        localStorage.setItem("netropolis_token",response.data.token);
+        localStorage.setItem("netropolis_token", response.data.token);
         setFormData({
           name: "",
           location: "",
           field_of_specialization: "",
-          persona:"",
+          persona: "",
           dob: "",
           email: "",
           password: "",
         });
-        navigate('/');
-
+        getLoggedIn();
+        navigate("/");
       })
       .catch((error) => {
-        alert(`something went wrong please refill the information ${error}`, )
+        alert(`something went wrong please refill the information ${error}`);
         console.log("Error occured");
       });
   };
@@ -103,7 +105,7 @@ function Register() {
                   />
                 </div>
                 <div className="col-xl-6">
-                  <div className="card-body p-md-5 text-black">
+                  <div className="card-body p-md-5 text-black userregister">
                     <h3 className="mb-5 text-uppercase">
                       User registration form
                     </h3>
@@ -325,11 +327,22 @@ function Register() {
                       </div>
                     </form>
                     <ul>
-                      <li><NavLink to="/login">Already registered? user login</NavLink></li>
-                      <li><NavLink to="/cmlogin">Already registered? Community_manager login</NavLink></li>
-                      <li><NavLink to="/cmregister">Register as a community manager</NavLink></li>
+                      <li>
+                        <NavLink to="/login">
+                          Already registered? user login
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink to="/cmlogin">
+                          Already registered? Community_manager login
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink to="/cmregister">
+                          Register as a community manager
+                        </NavLink>
+                      </li>
                     </ul>
-                    
                   </div>
                 </div>
               </div>

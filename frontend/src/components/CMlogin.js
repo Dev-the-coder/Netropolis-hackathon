@@ -5,8 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { API } from "../API";
 import "../css/userlogin.css"; 
+import "../context/AuthContext"
 
 function CMLogin() {
+  const { getLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -38,6 +40,7 @@ function CMLogin() {
           email: "",
           password: "",
         });
+        getLoggedIn();
         navigate('/cm');
 
       })
