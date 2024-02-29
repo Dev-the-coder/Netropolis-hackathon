@@ -319,7 +319,7 @@ const CMQuestboard = () => {
                 id={quest.id}
                 title={quest.title}
                 duration={quest.duration}
-                rewards={quest.rewards}
+                fee={quest.fee}
                 points={quest.points}
                 location={quest.location}
                 // noofapplicants={quest.noc}
