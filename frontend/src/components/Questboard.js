@@ -224,7 +224,7 @@ const Questboard = () => {
       try {
         // Replace 'YOUR_API_ENDPOINT' with the actual endpoint you want to send the GET request to
 
-        const apiEndpoint = { API } + "/quest/all";
+        const apiEndpoint = `${ API }/quest/all`;
         // const apiEndpoint ='https://netropolis-backend.vercel.app/quest/all/';
 
         const response = await axios.get(apiEndpoint);
@@ -245,6 +245,7 @@ const Questboard = () => {
   }, []); // The empty dependency array ensures that this effect runs once when the component mounts
 
   const handleChange = (event) => {
+    event.preventDefault();
     // console.log(event.target);
     if (event.target.name === "title") {
       setTitle(event.target.value);
@@ -256,7 +257,8 @@ const Questboard = () => {
     }
   };
 
-  const handleClick = () => {
+  const handleClick = (event) => {
+    event.preventDefault();
     // console.log(title,location);
     // setArr([
     //   {
@@ -270,7 +272,7 @@ const Questboard = () => {
 
     
 
-    const apiUrl = {API}+'/search/deepSearch';
+    const apiUrl = `${API}/search/deepSearch/`;
     
 
     axios({
@@ -282,7 +284,7 @@ const Questboard = () => {
     })
       .then((response) => {
         console.log("GET request successful", response.data);
-        setArr(response.data);
+        setArr(response.data.quests);
       })
       .catch((error) => {
         console.error("Error making GET request", error);
@@ -324,7 +326,7 @@ const Questboard = () => {
                 id={quest.id}
                 title={quest.title}
                 duration={quest.duration}
-                rewards={quest.rewards}
+                rewards={quest.points}
                 points={quest.points}
                 location={quest.location}
                 description={quest.description}

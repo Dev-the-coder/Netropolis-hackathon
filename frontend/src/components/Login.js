@@ -24,15 +24,13 @@ function Login() {
     e.preventDefault();
     console.log(formData);
     axios({
-      url: {API}+"/users/login",
+      url: `${API}/users/login`,
       method: "POST",
       data: formData,
     })
       .then((response) => {
-        // console.log("Response is :", response.data._id);
-        // const lfsuser = response.data._id;
-
-        localStorage.setItem("netropolis_token",response.data.token);
+        console.log(response);
+        localStorage.setItem("netropolis_token",response.token);
         setFormData({
           email: "",
           password: "",
@@ -40,9 +38,9 @@ function Login() {
         navigate('/');
 
       })
-      .catch(() => {
-        alert("something went wrong please refill the information")
-        console.log("Error occured");
+      .catch((e) => {
+        alert("something went wrong please refill the information, ", e)
+        console.log("Error occured", e);
       });
   };
 

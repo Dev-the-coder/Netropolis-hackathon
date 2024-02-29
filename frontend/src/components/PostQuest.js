@@ -4,6 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Button, Modal, Spinner, Form } from "react-bootstrap";
+import { API } from "../API";
 
 import { useNavigate } from "react-router-dom";
 
@@ -18,16 +19,14 @@ function PostQuest() {
   const [description, setdescription] = useState("");
   const [points, setPoints] = useState("");
   const [fee, setFee] = useState("");
-  const [allowance, setAllowance] = useState([]);
+  const [allowance, setAllowance] = useState("");
   const [tags, setTags] = useState("");
   const [show, setShow] = useState(true);
   const [loading, setloading] = useState(false);
 
   const handleInputChange = (e) => {
     const input = e.target.value;
-    // Split the input by commas and trim each number
-    const numbersArray = input.split(",").map((number) => number.trim());
-    setAllowance(numbersArray);
+    setAllowance(input);
   };
 
   const handleSubmit = () => {
@@ -53,11 +52,11 @@ function PostQuest() {
       alert("please fill all the mandatory fields");
     } else {
       setloading(true);
-      const accessToken = "YOUR_ACCESS_TOKEN";
+      const accessToken = localStorage.getItem("netropolis_token");
 
       const newPayload = {
         title: title,
-        providedBy: providedBy,
+        provided_by: providedBy,
         datetime: datetime,
         duration: duration,
         location: location,
@@ -70,12 +69,12 @@ function PostQuest() {
       console.log(newPayload);
 
       axios({
-        url: "api/quest/create/",
+        url: `${API}/quest/create/`,
         method: "POST",
         data: newPayload,
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`, // Include the token in the 'Authorization' header
+          "Authorization": accessToken, // Include the token in the 'Authorization' header
         },
       })
         .then((response) => {
@@ -168,7 +167,7 @@ function PostQuest() {
               </Form.Label>
               <Form.Control
                 type="text"
-                placeholder="dd/mm/yyyy::hh/mm"
+                placeholder="yyyy/mm/dd hh/mm"
                 value={datetime}
                 onChange={(e) => setDatetime(e.target.value)}
               />
@@ -251,7 +250,7 @@ function PostQuest() {
               <Form.Control
                 type="text"
                 placeholder="e.g., Forest Bathing Tour1, Two dinner events"
-                value={allowance.join(", ")}
+                value={allowance}
                 onChange={handleInputChange}
               />
             </Form.Group>

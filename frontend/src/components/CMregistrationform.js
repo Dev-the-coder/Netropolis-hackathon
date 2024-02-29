@@ -7,7 +7,7 @@ import { API } from "../API";
 function CMRegister() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    Name: "",
+    name: "",
     location: "",
     dob: "",
     area: "",
@@ -35,7 +35,7 @@ function CMRegister() {
     e.preventDefault();
     // console.log(formData);
     axios({
-      url: `${API}/commanager/register`,
+      url: `${API}/commanager/register/`,
       method: "POST",
       data: formData,
     })
@@ -45,7 +45,7 @@ function CMRegister() {
 
         localStorage.setItem("netropolis_token",response.data.token);
         setFormData({
-          Name: "",
+          name: "",
           location: "",
           dob: "",
           area: "",
@@ -63,7 +63,7 @@ function CMRegister() {
 
   const handleReset = () => {
     setFormData({
-      Name: "",
+      name: "",
       location: "",
       dob: "",
       area: "",
@@ -105,8 +105,8 @@ function CMRegister() {
                             <input
                               className="form-control form-control-lg"
                               type="text"
-                              name="Name"
-                              value={formData.Name}
+                              name="name"
+                              value={formData.name}
                               onChange={handleInputChange}
                               required
                             />

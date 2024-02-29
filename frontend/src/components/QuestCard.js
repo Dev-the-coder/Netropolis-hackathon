@@ -47,7 +47,7 @@ const QuestCard = (props) => {
               {props.duration}
             </Card.Subtitle>
             <Card.Subtitle className="mb-2 text-muted quest-card-subtitle">
-              <span>Reward : </span>
+              <span>Points : </span>
               {props.rewards}
             </Card.Subtitle>
             <Card.Subtitle className="mb-2 text-muted quest-card-subtitle">
