@@ -56,8 +56,8 @@ const Navbar = () => {
         <nav className="main-nav">
           <div className="logo">
             <h2>
-              <span>Q</span>uest
-              <span>P</span>rovider
+              <span>N</span>etroPolis
+              <span>C</span>ommunity
             </h2>
           </div>
           <div className={"menu-link"}>
