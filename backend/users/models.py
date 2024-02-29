@@ -24,6 +24,7 @@ def QuestSchema(request):
     response = []
     for res in request:
         response.append({
+            "status": res.quest.active,
             "id": res.quest.id,
             "title": res.quest.title,
             "datetime": res.quest.datetime,

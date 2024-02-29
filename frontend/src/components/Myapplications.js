@@ -10,15 +10,14 @@ const Myapplication = () => {
   useEffect(() => {
     const token = localStorage.getItem("netropolis_token");
     const headers = {
-      Authorization: { token },
+      "Authorization": token ,
       "Content-Type": "application/json",
     };
     axios
-      .get({ API } + "/quest/applied/", { headers })
+      .get(`${API}/users/quests`, { headers })
       .then((response) => {
-        // Handle the response data
-        setApplied(response.data);
-        // console.log("Response:", response.data);
+        setApplied(response.data.quests);
+        console.log("Response:", response.data);
       })
       .catch((error) => {
         // Handle errors
@@ -38,14 +37,29 @@ const Myapplication = () => {
           {applicationId.length > 0 ? (
             <div className="container">
               <div className="row">
-                {applicationId.map((id) => {
+                {/* {applicationId.map((id) => {
                   return <ApplicationCard appId={id} />;
+                })} */}
+                {applied.map((quest) => {
+                  return (
+                    <ApplicationCard
+                      key={quest.id}
+                      id={quest.id}
+                      duration={quest.duration}
+                      rewards={quest.rewards}
+                      location={quest.location}
+                      status={quest.status}
+                      title={quest.title}
+                      allowance={quest.allowance}
+                      datetime={quest.datetime}
+                      description={quest.description}
+                      fee={quest.fee}
+                      points={quest.points}
+                      provided_by={quest.provided_by}
+                      tags={quest.tags}
+                    />
+                  );
                 })}
-                {/* {applicationId .map((id) => (
-                <div key={id}>
-                  <ApplicationCard appId={id} />
-                </div>
-              ))} */}
               </div>
             </div>
           ) : (

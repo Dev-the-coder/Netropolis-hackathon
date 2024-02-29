@@ -152,6 +152,7 @@ def get_user(request):
                     items=openapi.Schema(
                         type=openapi.TYPE_OBJECT,
                         properties={
+                            "status": openapi.Schema(type=openapi.TYPE_STRING),
                             "id": openapi.Schema(type=openapi.TYPE_INTEGER),
                             "title": openapi.Schema(type=openapi.TYPE_STRING),
                             "datetime": openapi.Schema(type=openapi.TYPE_STRING),

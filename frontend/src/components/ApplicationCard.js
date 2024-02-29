@@ -50,7 +50,7 @@ const ApplicationCard = (props) => {
             </Card.Subtitle>
             <Card.Subtitle className="mb-2 text-muted quest-card-subtitle">
               <span>Reward : </span>
-              {props.rewards}
+              {props.allowance}
             </Card.Subtitle>
             <Card.Subtitle className="mb-2 text-muted quest-card-subtitle">
               <span>Location : </span>
@@ -60,9 +60,9 @@ const ApplicationCard = (props) => {
               <span>status : </span>
               {props.status}
             </Card.Subtitle>
-            <Button variant="contained" onClick={handleClick}>
+            {/* <Button variant="contained" onClick={handleClick}>
               Withdraw application
-            </Button>
+            </Button> */}
           </Card.Body>
         </Card>
       </div>
