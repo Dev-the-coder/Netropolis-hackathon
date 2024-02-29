@@ -272,5 +272,5 @@ def updateStatus(status, user_id, quest_id):
         quest = Quest.objects.get(id=quest_id)
         user.active_quest = False
         user.points = user.points + quest.points
-        user.completed_quest_tags = user.completed_quest_tags + quest.tags
+        user.completed_quest_tags = user.completed_quest_tags + "," +quest.tags 
         user.save()
