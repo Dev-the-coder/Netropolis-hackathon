@@ -17,12 +17,12 @@ const UserCard = (props) => {
 
     const data = {
       status: "accepted",
-      questId: props.quest_id,
-      userId: props.user_id,
+      quest_id: props.quest_id,
+      user_id: props.user_id,
     };
 
     axios
-      .put(`${API}/quest/questaction`, data, {
+      .put(`${API}/quest/questaction/`, data, {
         headers: {
           Authorization: token,
         },
