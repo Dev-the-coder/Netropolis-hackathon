@@ -130,5 +130,5 @@ The Search app enhances user experience by enabling quest discovery through keyw
 
 ### Documentation
 
-The backend API is thoroughly documented using Swagger, providing comprehensive guidance on available endpoints, request parameters, and response formats. The documentation is accessible at [Netropolis Backend Swagger](https://netropolis-backend.vercel.app/swagger), offering developers and stakeholders insights into the platform's functionalities and integration possibilities.
+The backend API is thoroughly documented using Swagger, providing comprehensive guidance on available endpoints, request parameters, and response formats. The documentation is accessible at [Netropolis Backend Swagger](https://netropolis-backend.vercel.app/swagger), offering developers and stakeholders insights into the platform's functionalities and integration possibilities. This documentation is also available in the backend directory [here](https://github.com/Pranay-Pandey/Netropolis-hackathon/blob/main/backend/readme.md)
 
