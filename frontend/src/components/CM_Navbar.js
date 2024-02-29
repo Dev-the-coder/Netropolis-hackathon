@@ -60,7 +60,7 @@ const CMNavbar = () => {
           <div className={"menu-link"}>
             <ul>
               <li>
-                <NavLink to="/">Home</NavLink>
+                <NavLink to="/cm">Home</NavLink>
               </li>
               <li>
                 {loggedIn ? (
