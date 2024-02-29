@@ -8,9 +8,9 @@ import { API } from "../API";
 function Register() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    Name: "",
+    name: "",
     location: "",
-    specialization: "",
+    field_of_specialization: "",
     persona: "",
     dob: "",
     email: "",
@@ -44,21 +44,20 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(formData);
     axios({
       url: `${API}/users/register`,
-      method: "POST",
+      method: "post",
       data: formData,
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
       .then((response) => {
-        // console.log("Response is :", response.data._id);
-        // const lfsuser = response.data._id;
-
         localStorage.setItem("netropolis_token",response.data.token);
         setFormData({
-          Name: "",
+          name: "",
           location: "",
-          specialization: "",
+          field_of_specialization: "",
           persona:"",
           dob: "",
           email: "",
@@ -67,8 +66,8 @@ function Register() {
         navigate('/');
 
       })
-      .catch(() => {
-        alert("something went wrong please refill the information")
+      .catch((error) => {
+        alert(`something went wrong please refill the information ${error}`, )
         console.log("Error occured");
       });
   };
@@ -116,8 +115,8 @@ function Register() {
                             <input
                               className="form-control form-control-lg"
                               type="text"
-                              name="Name"
-                              value={formData.Name}
+                              name="name"
+                              value={formData.name}
                               onChange={handleInputChange}
                               required
                               placeholder="XYZ"
@@ -225,8 +224,8 @@ function Register() {
                       <div class="form-outline mb-4">
                         <input
                           type="string"
-                          name="specialization"
-                          value={formData.specialization}
+                          name="field_of_specialization"
+                          value={formData.field_of_specialization}
                           onChange={handleInputChange}
                           required
                           class="form-control form-control-lg"
