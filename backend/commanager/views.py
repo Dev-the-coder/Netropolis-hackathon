@@ -11,7 +11,7 @@ from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
 @swagger_auto_schema(
-    tags=['ComManager'],
+    tags=['Community Manager'],
     method='post',
     request_body=openapi.Schema(
         type=openapi.TYPE_OBJECT,
@@ -48,7 +48,7 @@ def register(request):
         return JsonResponse({"error": str(e)}, status=500)
     
 @swagger_auto_schema(
-    tags=['ComManager'],
+    tags=['Community Manager'],
     method='post',
     request_body=openapi.Schema(
         type=openapi.TYPE_OBJECT,
@@ -79,7 +79,7 @@ def login(request):
     
 
 @swagger_auto_schema(
-    tags=['ComManager'],
+    tags=['Community Manager'],
     method='get',
     manual_parameters=[openapi.Parameter('Authorization', in_=openapi.IN_HEADER, type=openapi.TYPE_STRING, required=True)],
     responses={
@@ -114,7 +114,7 @@ def getuser(request):
         return JsonResponse({"error": "Token not provided"}, status=400)
     
 @swagger_auto_schema(
-    tags=['ComManager'],
+    tags=['Community Manager'],
     method='get',
     operation_description='Get all quests created by the ComManager. Requires a valid token of Community manager.',
     manual_parameters=[openapi.Parameter('Authorization', in_=openapi.IN_HEADER, type=openapi.TYPE_STRING, required=True)],
