@@ -9,6 +9,7 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import api_view
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from quest.models import QuestRegistration
 
 @swagger_auto_schema(
     tags=['User'],
@@ -133,6 +134,52 @@ def get_user(request):
             "active_quest": user.active_quest,
             "email": user.email,
         }, status=200)
+    except User.DoesNotExist:
+        return JsonResponse({"error": "User does not exist"}, status=404)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+    
+@swagger_auto_schema(
+    tags=['User'],
+    method='get',
+    manual_parameters=[openapi.Parameter('Authorization', in_=openapi.IN_HEADER, type=openapi.TYPE_STRING, required=True)],
+    responses={
+        201: openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'quests': openapi.Schema(
+                    type=openapi.TYPE_ARRAY,
+                    items=openapi.Schema(
+                        type=openapi.TYPE_OBJECT,
+                        properties={
+                            'id': openapi.Schema(type=openapi.TYPE_INTEGER),
+                            'quest_id': openapi.Schema(type=openapi.TYPE_INTEGER),
+                            'user_id': openapi.Schema(type=openapi.TYPE_INTEGER),
+                            'status': openapi.Schema(type=openapi.TYPE_STRING),
+                            'created_at': openapi.Schema(type=openapi.TYPE_STRING),
+                            'updated_at': openapi.Schema(type=openapi.TYPE_STRING),
+                        }
+                    )
+                )
+            },
+        ),
+        400: 'Bad Request'
+    }
+)
+@api_view(['GET'])
+@csrf_exempt
+@require_http_methods(['GET'])
+def quests(request):
+    token = request.headers.get('Authorization')
+    if not token:
+        return JsonResponse({"error": "Token is required"}, status=400)
+    try:
+        payload = decode_token(token)
+        if payload.get('role') != 'user':
+            return JsonResponse({"error": "Invalid token"}, status=400)
+        quests = QuestRegistration.objects.filter(user_id=payload.get('id'))
+        return JsonResponse({"quests": list(quests.values())}, status=200)
+        
     except User.DoesNotExist:
         return JsonResponse({"error": "User does not exist"}, status=404)
     except Exception as e:

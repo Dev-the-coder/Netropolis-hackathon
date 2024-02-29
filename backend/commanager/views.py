@@ -69,7 +69,9 @@ def register(request):
 def login(request):
     user_details = request.data
     try:
-        user = ComManager.objects.get(email=user_details['email'], password=user_details['password'])
+        user = ComManager.objects.get(email=user_details['email'])
+        if user.password != user_details['password']:
+            return JsonResponse({"error": "Invalid email or password"}, status=400)
         token = create_token(user.id, "commanager")
         return JsonResponse({"message": "ComManager logged in successfully", "token": token}, status=200)
     except ComManager.DoesNotExist:
