@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/jobtypes.css"
+import axios from "axios";
+import { API } from "../API";
+
 
 const Jobtypes = () => {
+  const [tags,setTag] = useState([]);
   return (
     <>
       <div className="jobbox" >

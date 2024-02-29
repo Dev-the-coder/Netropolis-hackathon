@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate,NavLink } from "react-router-dom";
 import "../css/register.css";
+import { API } from "../API";
 
 function Register() {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ function Register() {
     e.preventDefault();
     // console.log(formData);
     axios({
-      url: "api/users/register",
+      url: `${API}/users/register`,
       method: "POST",
       data: formData,
     })
@@ -53,7 +54,7 @@ function Register() {
         // console.log("Response is :", response.data._id);
         // const lfsuser = response.data._id;
 
-        // localStorage.setItem("lfsuserid",response.data._id);
+        localStorage.setItem("netropolis_token",response.data.token);
         setFormData({
           Name: "",
           location: "",

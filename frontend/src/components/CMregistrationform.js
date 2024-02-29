@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../css/register.css";
 import { useNavigate,NavLink } from "react-router-dom";
 import axios from "axios";
+import { API } from "../API";
 
 function CMRegister() {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ function CMRegister() {
     e.preventDefault();
     // console.log(formData);
     axios({
-      url: "api/commanager/register",
+      url: `${API}/commanager/register`,
       method: "POST",
       data: formData,
     })
@@ -42,7 +43,7 @@ function CMRegister() {
         // console.log("Response is :", response.data._id);
         // const lfsuser = response.data._id;
 
-        // localStorage.setItem("lfsuserid",response.data._id);
+        localStorage.setItem("netropolis_token",response.data.token);
         setFormData({
           Name: "",
           location: "",

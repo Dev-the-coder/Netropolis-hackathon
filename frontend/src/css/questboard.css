@@ -10,9 +10,8 @@
     grid-template-columns: 26rem  20rem;
 }
 .Questboardsearchbar{
-    /* background-color: beige; */
     grid-column: 2/5;
-    height: 200px;
+    height: 350px;
     width: 930px;
     text-align: center;
     padding-top: 50px;
@@ -45,3 +44,30 @@
     text-align: left;
     margin-left: 27px;
 }
+
+
+
+
+
+
+.Questboardsearchbox .Questboardsearchbar h1{
+    font-size: 5.0rem;
+}
+
+.Questboardsearchbox .Questboardsearchbar h2{
+    font-size: 3.0rem;
+    padding: 15px;
+}
+
+/* .Questboardsearchbox .Questboardsearchbar input{
+    width: 356px;
+    height: 55px;
+    margin: 22px;
+    margin-bottom: 10px;
+    border: aliceblue;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 300;
+} */
+

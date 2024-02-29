@@ -11,88 +11,112 @@ function PostQuest() {
   const Navigate = useNavigate();
 
   const [title, setTitle] = useState("");
+  const [providedBy, setProvidedby] = useState("");
+  const [datetime, setDatetime] = useState("");
   const [duration, setDuration] = useState("");
   const [location, setLocation] = useState("");
   const [description, setdescription] = useState("");
-  const [points, setPoints] = useState();
-  const [fee, setFee] = useState();
+  const [points, setPoints] = useState("");
+  const [fee, setFee] = useState("");
   const [allowance, setAllowance] = useState([]);
+  const [tags, setTags] = useState("");
   const [show, setShow] = useState(true);
   const [loading, setloading] = useState(false);
 
   const handleInputChange = (e) => {
     const input = e.target.value;
     // Split the input by commas and trim each number
-    const numbersArray = input.split(',').map(number => number.trim());
+    const numbersArray = input.split(",").map((number) => number.trim());
     setAllowance(numbersArray);
   };
 
   const handleSubmit = () => {
-    setloading(true);
+    if (
+      points === "" ||
+      fee === "" ||
+      tags === "" ||
+      title === "" ||
+      providedBy === "" ||
+      datetime === "" ||
+      duration === "" ||
+      location === "" ||
+      description === ""
+    ) {
+      // toast("you missed some required fields", {
+      //   position: toast.POSITION.TOP_RIGHT,
+      //   autoClose: 3000, // Close after 3 seconds
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      // })
+      alert("please fill all the mandatory fields");
+    } else {
+      setloading(true);
+      const accessToken = "YOUR_ACCESS_TOKEN";
 
-    if (title) {
-    //   const user = localStorage.getItem('lfsuserid');
       const newPayload = {
-        title:title,
-        duration:duration,
-        location:location,
-        description:description,
-        points:points,
-        fee:fee,
-        allowance:allowance
-      }
+        title: title,
+        providedBy: providedBy,
+        datetime: datetime,
+        duration: duration,
+        location: location,
+        description: description,
+        points: points,
+        fee: fee,
+        allowance: allowance,
+        tags: tags,
+      };
       console.log(newPayload);
 
-    //   axios({
-    //     url: "http://localhost:5000/postitem",
-    //     method: "POST",
-    //     data: newPayload,
-    //   })
-    //     .then((response) => {
-    //       // console.log(response);
-    //       toast("Wohoo 🤩! Item listed successfully.", {
-    //         position: toast.POSITION.TOP_RIGHT,
-    //         autoClose: 3000, // Close after 3 seconds
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //       });
-    //       setitemname("");
-    //       setdescription("");
-    //       settype("");
-    //       setitemquestion("");
-    //       setitemimage([]);
-    //       // fileInputRef.current.value = '';
-    //       // console.log("Executed");
-    //       Navigate('/feed');
-    //       setloading(false);
-    //       setShow(false);
-    //     })
-    //     .catch((err) => {
-    //       setloading(false);
-    //       console.log(err);
-    //       toast("Oops 😞! Check internet connection or try again later.", {
-    //         position: toast.POSITION.TOP_RIGHT,
-    //         autoClose: 3000, // Close after 3 seconds
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //       });
-    //     });
-    // } else {
-    //   // console.log("required field missed");
-    //   toast("you missed some required fields", {
-    //     position: toast.POSITION.TOP_RIGHT,
-    //     autoClose: 3000, // Close after 3 seconds
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //   });
+      axios({
+        url: "api/quest/create/",
+        method: "POST",
+        data: newPayload,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`, // Include the token in the 'Authorization' header
+        },
+      })
+        .then((response) => {
+          // console.log(response);
+          // toast("Wohoo 🤩! Item listed successfully.", {
+          //   position: toast.POSITION.TOP_RIGHT,
+          //   autoClose: 3000, // Close after 3 seconds
+          //   hideProgressBar: false,
+          //   closeOnClick: true,
+          //   pauseOnHover: true,
+          //   draggable: true,
+          // });
+          // setitemname("");
+          // setdescription("");
+          // settype("");
+          // setitemquestion("");
+          // setitemimage([]);
+          // // fileInputRef.current.value = '';
+          // // console.log("Executed");
+          // Navigate("/feed");
+          // setloading(false);
+          // setShow(false);
+
+          Navigate('/cm')
+        })
+        .catch((err) => {
+          setloading(false);
+          // console.log(err);
+          alert('something bad happen');
+          // toast("Oops 😞! Check internet connection or try again later.", {
+          //   position: toast.POSITION.TOP_RIGHT,
+          //   autoClose: 3000, // Close after 3 seconds
+          //   hideProgressBar: false,
+          //   closeOnClick: true,
+          //   pauseOnHover: true,
+          //   draggable: true,
+          // });
+        });
     }
   };
+
   return (
     <div>
       {/* <img src={src}/> */}
@@ -118,6 +142,35 @@ function PostQuest() {
                 placeholder="Enter item"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>
+                <h3>
+                  Provided By<span style={{ color: "red" }}>*</span>
+                </h3>
+              </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="provider name"
+                value={providedBy}
+                onChange={(e) => setProvidedby(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>
+                <h3>
+                  datetime<span style={{ color: "red" }}>*</span>
+                </h3>
+              </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="dd/mm/yyyy::hh/mm"
+                value={datetime}
+                onChange={(e) => setDatetime(e.target.value)}
               />
             </Form.Group>
 
@@ -200,6 +253,20 @@ function PostQuest() {
                 placeholder="e.g., Forest Bathing Tour1, Two dinner events"
                 value={allowance.join(", ")}
                 onChange={handleInputChange}
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>
+                <h3>
+                  Tags<span style={{ color: "red" }}>*</span>
+                </h3>
+              </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter tags with comma separeted"
+                value={tags}
+                onChange={(e) => setTags(e.target.value)}
               />
             </Form.Group>
           </Form>

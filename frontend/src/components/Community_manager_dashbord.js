@@ -1,13 +1,13 @@
 import React from "react";
-import NavbarUI from "./navbar";
-import Footer from "./Footer";
+
+
+import CMNavbar from "./CM_Navbar";
 import Questboard from "./Questboard";
 
 const CMDashboard = ()=>{
     return <>
-        <NavbarUI/>
+        <CMNavbar/>
         <Questboard/>
-        <Footer/>
     </>;
 }
 

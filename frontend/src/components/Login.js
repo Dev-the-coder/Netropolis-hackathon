@@ -3,6 +3,8 @@ import "../css/register.css"; // Assuming you have a CSS file for styling
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+
+import { API } from "../API";
 function Login() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -22,7 +24,7 @@ function Login() {
     e.preventDefault();
     console.log(formData);
     axios({
-      url: "api/users/login",
+      url: {API}+"/users/login",
       method: "POST",
       data: formData,
     })
@@ -30,7 +32,7 @@ function Login() {
         // console.log("Response is :", response.data._id);
         // const lfsuser = response.data._id;
 
-        // localStorage.setItem("lfsuserid",response.data._id);
+        localStorage.setItem("netropolis_token",response.data.token);
         setFormData({
           email: "",
           password: "",

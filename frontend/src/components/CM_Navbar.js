@@ -4,10 +4,10 @@ import { Button } from "react-bootstrap";
 
 import { NavLink } from "react-router-dom";
 
-const Navbar = () => {
+const CMNavbar = () => {
   
   var [loggedIn,setloggedIn] = useState(true);
-  // var [CM,setCM] = useState(false);
+//   var [CM,setCM] = useState(false);
 
 
   useEffect(()=>{
@@ -61,18 +61,18 @@ const Navbar = () => {
               </li>
               <li>
                 {loggedIn ? (
-                  <NavLink to="/myapplications">My-applications</NavLink>
+                  <NavLink to="/approvedapplication">Approved-applications</NavLink>
                 ):(
                   <></>
                 )}
               </li>
-              {/* <li>
-                {loggedIn && CM ? (
+              <li>
+                {loggedIn ? (
                   <NavLink to="/postquest">post quest</NavLink>
                 ) : (
                   <></>
                 )}
-              </li> */}
+              </li>
               <li>
                 {loggedIn ? (
                   <NavLink onClick={signout} to="/">
@@ -90,4 +90,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default CMNavbar;
