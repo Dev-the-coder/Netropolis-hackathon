@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { API } from "../API";
 import "../css/profile.css";
 import axios from "axios";
-import Navbar from "./navbar";
+import CMNavbar from "./CM_Navbar";
 
 const CMProfile = () => {
   const [user, setUser] = useState({});
@@ -32,7 +32,7 @@ const CMProfile = () => {
   }, []);
   return (
     <>
-      <Navbar />
+      <CMNavbar />
       <div className="user-profile">
         <h1>Your Profile</h1>
         <p>

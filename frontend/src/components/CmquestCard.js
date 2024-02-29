@@ -4,10 +4,21 @@ import "../css/quest_card.css";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { API } from "../API";
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
 
 const CMQuestCard = (props) => {
+  const { loggedIn} = useContext(AuthContext);
   const Navigate = useNavigate();
   const id = props.id;
+
+  const handleclick = ()=>{
+    if(!loggedIn) {
+      Navigate('/cmlogin')
+    }
+    else
+    Navigate('/applications/'+id)
+  }
 
   return (
     <div className="col-4">
@@ -33,9 +44,11 @@ const CMQuestCard = (props) => {
               <span>Location : </span>
               {props.location}
             </Card.Subtitle>
-            <Link to={"/applications/" + id}>
+            {/* <Link to={"/applications/" + id}>
               Applications <span>: {props.noofapplicants}</span>
-            </Link>
+            </Link> */}
+            {/* <Button className="contained">Applications</Button> */}
+            <button onClick={handleclick} type="button" class="btn btn-primary">Applications</button>
           </Card.Body>
         </Card>
       </div>

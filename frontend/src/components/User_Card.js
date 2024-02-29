@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,7 +8,19 @@ import "../css/quest_card.css";
 
 const UserCard = (props) => {
   const navigate = useNavigate();
-  const [activeQuest, setActiveQuest] = useState(false);
+  const [bg_color,setbgcolor] = useState("white");
+  const status = props.status;
+  // var bg_color = "red";
+  useEffect(()=>{
+    if(status==="accepted"){
+      setbgcolor("green");
+    }else if(status==="rejected"){
+      setbgcolor("red");
+    }
+  },[]);
+  
+
+
 
   const token = localStorage.getItem("netropolis_token");
 
@@ -89,7 +101,7 @@ const UserCard = (props) => {
   return (
     <div className="col-6">
       <div className="card my-10" style={{ marginTop: "3rem" }}>
-        <Card className="quest-card">
+        <Card className="quest-card" style={{ backgroundColor: bg_color}}>
           <Card.Body>
             <Card.Title className="quest-card-title">
               <span>Name: </span>
@@ -124,27 +136,48 @@ const UserCard = (props) => {
               {props.points}
             </Card.Subtitle>
             <div className="buttons-container">
-              <Button
+              {(status!==("accepted")&&status!==("rejected"))?
+              (<Button
                 style={{ margin: "4px" }}
                 variant="contained"
                 onClick={handleAccept}
               >
+                Accept
+              </Button>):
+              (<Button
+                style={{ margin: "4px" }}
+                variant="outlined" disabled
+              >
                 Accepted
-              </Button>
-              <Button
+              </Button>)}
+              {(status!==("accepted")&&status!==("rejected"))?
+              (<Button
                 style={{ margin: "4px" }}
                 variant="contained"
                 onClick={handleReject}
               >
+                Reject
+              </Button>):
+              (<Button
+                style={{ margin: "4px" }}
+                variant="outlined" disabled
+              >
                 Rejected
-              </Button>
-              <Button
+              </Button>)}
+              {(status!==("rejected"))?
+              (<Button
                 style={{ margin: "4px" }}
                 variant="contained"
                 onClick={handleComplete}
               >
                 Completed
-              </Button>
+              </Button>):
+              (<Button
+                style={{ margin: "4px" }}
+                variant="outlined" disabled
+              >
+                Completed
+              </Button>)}
             </div>
           </Card.Body>
         </Card>
