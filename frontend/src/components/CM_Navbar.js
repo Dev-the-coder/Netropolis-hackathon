@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 
 const CMNavbar = () => {
   
-  var [loggedIn,setloggedIn] = useState(true);
+  var [loggedIn,setloggedIn] = useState(false);
 //   var [CM,setCM] = useState(false);
 
 
@@ -84,8 +84,8 @@ const CMNavbar = () => {
               </li>
               <li>
                 {loggedIn ? (
-                  <NavLink to="/userprofile">
-                    your profile
+                  <NavLink to="/cmprofile">
+                    Profile
                   </NavLink>
                 ) : <></>}
               </li>

@@ -1,0 +1,15 @@
+.user-profile{
+    border: 2px solid black;
+    width: 28%;
+    margin-left: 206px;
+    padding: 24px;
+}
+
+.user-profile h1{
+    font-size: 46px;
+    font-weight: 700;
+}
+
+.user-profile p strong{
+    font-size: 14px;
+}

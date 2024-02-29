@@ -327,6 +327,7 @@ const Questboard = () => {
                 rewards={quest.rewards}
                 points={quest.points}
                 location={quest.location}
+                description={quest.description}
                 noofapplicants={quest.noc}
               />
             );
