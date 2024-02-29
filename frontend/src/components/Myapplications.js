@@ -24,8 +24,6 @@ const Myapplication = () => {
         console.error("Error:", error);
       });
   }, []);
-  var applicationId = ["10", "02", "03"];
-
   return (
     <>
       <Navbar />
@@ -34,12 +32,9 @@ const Myapplication = () => {
           <h1>My application</h1>
         </div>
         <div>
-          {applicationId.length > 0 ? (
+          {applied.length > 0 ? (
             <div className="container">
               <div className="row">
-                {/* {applicationId.map((id) => {
-                  return <ApplicationCard appId={id} />;
-                })} */}
                 {applied.map((quest) => {
                   return (
                     <ApplicationCard

@@ -11,7 +11,6 @@ import { API } from "../API";
 const Questboard = () => {
   const [location, setLocation] = useState("");
   const [title, setTitle] = useState("");
-  const [tag, setTag] = useState("");
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
