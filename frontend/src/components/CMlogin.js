@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { API } from "../API";
+import "../css/userlogin.css"; 
 
 function CMLogin() {
   const navigate = useNavigate();
@@ -65,7 +66,7 @@ function CMLogin() {
                   />
                 </div>
                 <div className="col-xl-6">
-                  <div className="card-body p-md-5 text-black">
+                  <div className="card-body p-md-5 text-black userlogin">
                     <h3 className="mb-5 text-uppercase">Community_manager Login form</h3>
                     <form onSubmit={handleSubmit}>
                       <div className="form-outline mb-4">

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../css/register.css"; // Assuming you have a CSS file for styling
+import "../css/userlogin.css"; 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
@@ -64,8 +64,8 @@ function Login() {
                     }}
                   />
                 </div>
-                <div className="col-xl-6">
-                  <div className="card-body p-md-5 text-black">
+                <div className="col-xl-6" >
+                  <div className="card-body p-md-5 text-black userlogin">
                     <h3 className="mb-5 text-uppercase">User Login form</h3>
                     <form onSubmit={handleSubmit}>
                       <div className="form-outline mb-4">
