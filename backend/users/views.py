@@ -1,4 +1,4 @@
-from users.models import User
+from users.models import User, QuestSchema
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
@@ -152,12 +152,17 @@ def get_user(request):
                     items=openapi.Schema(
                         type=openapi.TYPE_OBJECT,
                         properties={
-                            'id': openapi.Schema(type=openapi.TYPE_INTEGER),
-                            'quest_id': openapi.Schema(type=openapi.TYPE_INTEGER),
-                            'user_id': openapi.Schema(type=openapi.TYPE_INTEGER),
-                            'status': openapi.Schema(type=openapi.TYPE_STRING),
-                            'created_at': openapi.Schema(type=openapi.TYPE_STRING),
-                            'updated_at': openapi.Schema(type=openapi.TYPE_STRING),
+                            "id": openapi.Schema(type=openapi.TYPE_INTEGER),
+                            "title": openapi.Schema(type=openapi.TYPE_STRING),
+                            "datetime": openapi.Schema(type=openapi.TYPE_STRING),
+                            "location": openapi.Schema(type=openapi.TYPE_STRING),
+                            "provided_by": openapi.Schema(type=openapi.TYPE_STRING),
+                            "duration": openapi.Schema(type=openapi.TYPE_STRING),
+                            "description": openapi.Schema(type=openapi.TYPE_STRING),
+                            "points": openapi.Schema(type=openapi.TYPE_INTEGER),
+                            "fee": openapi.Schema(type=openapi.TYPE_INTEGER),
+                            "allowance": openapi.Schema(type=openapi.TYPE_STRING),
+                            "tags": openapi.Schema(type=openapi.TYPE_STRING),
                         }
                     )
                 )
@@ -178,7 +183,8 @@ def quests(request):
         if payload.get('role') != 'user':
             return JsonResponse({"error": "Invalid token"}, status=400)
         quests = QuestRegistration.objects.filter(user_id=payload.get('id'))
-        return JsonResponse({"quests": list(quests.values())}, status=200)
+        quests = QuestSchema(quests)
+        return JsonResponse({"quests": quests}, status=200)
         
     except User.DoesNotExist:
         return JsonResponse({"error": "User does not exist"}, status=404)

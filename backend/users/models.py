@@ -18,3 +18,22 @@ class User(models.Model):
 
     class Meta:
         db_table = "users"
+
+# Return schema for quests user has applied for
+def QuestSchema(request):
+    response = []
+    for res in request:
+        response.append({
+            "id": res.quest.id,
+            "title": res.quest.title,
+            "datetime": res.quest.datetime,
+            "location": res.quest.location,
+            "provided_by": res.quest.provided_by,
+            "duration": res.quest.duration,
+            "description": res.quest.description,
+            "points": res.quest.points,
+            "fee": res.quest.fee,
+            "allowance": res.quest.allowance,
+            "tags": res.quest.tags,
+        })
+    return response
